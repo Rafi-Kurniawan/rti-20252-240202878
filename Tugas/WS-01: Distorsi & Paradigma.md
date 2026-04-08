@@ -1,96 +1,122 @@
-## Template A.1 — Research Mindset Self-Assessment
-
-Nama Peneliti    : Rafi Kurniawan
-
-Tanggal          : 4/8/2026
-
-1. Ketika membaca klaim "metode X 95% akurat":
-   - Pertanyaan pertama saya: 95% akurat pada dataset seperti apa, dibanding metode apa, dan diuji dengan metrik apa?
-   - Data yang dibutuhkan untuk verifikasi: Dataset yang digunakan, ukuran data, distribusi kelas, baseline pembanding, confusion matrix, dan metode evaluasi.
-
-2. Posisi paradigma:
-   - Pendekatan: [x] Positivis  [ ] Interpretivis  [x] Design Science  [ ] Mixed
-   - Alasan: Karena penelitian ini mengukur performa algoritma secara objektif melalui eksperimen dan metrik kuantitatif.
-
-3. Identifikasi distorsi:
-   - Asumsi tersembunyi: Bahwa hasil tinggi pada benchmark berarti metode akan selalu unggul di semua konteks.
-   - Sumber bias potensial: Bias dataset, data leakage, benchmark selection bias, dan tuning parameter yang tidak adil.
-   - Langkah mitigasi: Gunakan beberapa dataset, cross-validation, baseline yang adil, dan dokumentasi preprocessing secara jelas.
-
-4. Komitmen etika:
-   - Data yang tidak akan dimanipulasi: Hasil eksperimen, outlier, distribusi data, dan metrik evaluasi.
-   - Batasan yang diakui sejak awal: Hasil eksperimen hanya berlaku pada dataset dan skenario yang diuji.
+# WS-01 & WS-02  
+## Research Mindset Self-Assessment & Problem Statement Builder  
+### Berdasarkan Paper:
+### **A high-accuracy phishing website detection method based on machine learning**  
+**Bahaghighat, Ghasemi, & Ozen (2023)**
 
 ---
 
-## Latihan 1 — Identifikasi Distorsi
+## Template A.1 — Research Mindset Self-Assessment
 
-Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan performa." Telusuri setiap tahap Research Trust Model.
+**Nama Peneliti** : ____________________  
+**Tanggal** : ____________________
 
-**Paper yang dipilih:**  
-> Judul: *XGBoost: A Scalable Tree Boosting System*  
-> Penulis (Tahun): Tianqi Chen & Carlos Guestrin (2016)  
-> Link: [https://arxiv.org/abs/1603.02754](https://arxiv.org/abs/1603.02754)  
-> PDF: [https://arxiv.org/pdf/1603.02754](https://arxiv.org/pdf/1603.02754)
+### 1. Ketika membaca klaim "metode X 95% akurat":
+- **Pertanyaan pertama saya:**  
+  Akurasi tersebut diperoleh dari dataset seperti apa, dengan distribusi kelas, metode evaluasi, dan baseline pembanding yang bagaimana?
+
+- **Data yang dibutuhkan untuk verifikasi:**  
+  Dataset yang digunakan, ukuran dan distribusi kelas, metode preprocessing, teknik validasi, confusion matrix, metrik evaluasi lengkap, serta perbandingan dengan model baseline.
+
+---
+
+### 2. Posisi paradigma:
+- **Pendekatan:**  
+  [x] Positivis  
+  [ ] Interpretivis  
+  [ ] Design Science  
+  [ ] Mixed  
+
+- **Alasan:**  
+  Penelitian ini berfokus pada pengujian performa model machine learning secara objektif melalui data kuantitatif dan metrik evaluasi seperti accuracy, precision, recall, specificity, dan runtime. Tujuan utamanya adalah menguji efektivitas metode dalam mendeteksi phishing website secara empiris.
+
+---
+
+### 3. Identifikasi distorsi:
+- **Asumsi tersembunyi:**  
+  Dataset yang digunakan diasumsikan cukup representatif untuk menggambarkan karakteristik phishing website di dunia nyata.
+
+- **Sumber bias potensial:**  
+  Ketidakseimbangan kelas, kualitas fitur, pemilihan dataset, preprocessing yang terlalu spesifik terhadap data tertentu, serta kemungkinan overfitting pada data latih.
+
+- **Langkah mitigasi:**  
+  Menggunakan balancing dataset, validasi yang jelas, membandingkan beberapa model baseline, melaporkan seluruh tahapan preprocessing, dan mengevaluasi model pada data yang terpisah dari data pelatihan.
+
+---
+
+### 4. Komitmen etika:
+- **Data yang tidak akan dimanipulasi:**  
+  Hasil metrik evaluasi, distribusi dataset, hasil confusion matrix, serta runtime eksperimen.
+
+- **Batasan yang diakui sejak awal:**  
+  Hasil penelitian bergantung pada kualitas dan cakupan dataset yang digunakan, sehingga generalisasi terhadap seluruh bentuk phishing website di dunia nyata tetap memiliki keterbatasan.
+
+---
+
+# Latihan 1 — Identifikasi Distorsi
+
+## Paper yang dipilih:
+> **Judul:** *A high-accuracy phishing website detection method based on machine learning*  
+> **Penulis (Tahun):** Bahaghighat, Ghasemi, & Ozen (2023)
 
 | Tahap | Apa yang Dilakukan | Potensi Distorsi |
 |-------|-------------------|-----------------|
-| Reality → Data | Mengambil dataset benchmark machine learning untuk tugas klasifikasi dan ranking | Dataset tidak merepresentasikan kondisi dunia nyata secara penuh |
-| Data → Processing | Membersihkan data, encoding fitur, menangani missing value, membagi train-test | Data leakage, preprocessing yang tidak konsisten antar model |
-| Processing → Analysis | Melatih model XGBoost dan membandingkannya dengan baseline | Hyperparameter XGBoost dituning lebih baik daripada baseline |
-| Analysis → Inference | Menyimpulkan bahwa XGBoost lebih cepat dan lebih baik | Generalisasi berlebihan dari hasil benchmark |
-| Inference → Knowledge | Komunitas menerima XGBoost sebagai metode unggul | Overclaim bahwa XGBoost selalu terbaik untuk semua kasus |
+| **Reality → Data** | Mengumpulkan dataset website phishing dan legitimate berdasarkan fitur-fitur tertentu | Dataset mungkin tidak sepenuhnya merepresentasikan variasi phishing terbaru di dunia nyata |
+| **Data → Processing** | Melakukan preprocessing, balancing dataset, penghapusan fitur konstan, dan reduksi fitur | Pemrosesan data dapat mengubah distribusi asli data dan berpotensi membuat model terlalu “cocok” dengan dataset |
+| **Processing → Analysis** | Melatih dan membandingkan beberapa model machine learning | Pemilihan hyperparameter atau konfigurasi model dapat memengaruhi hasil secara signifikan |
+| **Analysis → Inference** | Menarik kesimpulan bahwa model tertentu memiliki performa terbaik | Performa tinggi pada satu dataset belum tentu berlaku pada konteks atau dataset lain |
+| **Inference → Knowledge** | Menyimpulkan bahwa pendekatan machine learning efektif untuk deteksi phishing | Risiko overgeneralisasi jika hasil eksperimen dianggap berlaku universal tanpa validasi tambahan |
 
-**Distorsi paling besar di tahap:** Processing → Analysis
+**Distorsi paling besar di tahap:**  
+> **Reality → Data**
 
 **Dua distorsi spesifik yang teridentifikasi:**
-1. Unfair baseline comparison — model pembanding mungkin tidak dituning sebaik XGBoost
-2. Benchmark selection bias — dataset yang dipilih bisa lebih menguntungkan metode tertentu
+1. Dataset mungkin tidak cukup mewakili pola phishing terbaru atau variasi serangan di dunia nyata.  
+2. Proses balancing dan feature selection berpotensi membuat hasil evaluasi terlalu optimistis jika tidak diuji pada skenario yang lebih realistis.
 
 ---
 
-## Latihan 2 — Analisis Kasus Etika
+# Latihan 2 — Analisis Kasus Etika
 
-Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, hasil eksperimennya menjadi signifikan. Dengan outlier, hasilnya tidak signifikan.
+**Skenario:** Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, hasil eksperimennya menjadi signifikan. Dengan outlier, hasilnya tidak signifikan.
 
 | Perspektif | Analisis |
 |------------|---------|
-| Kejujuran ilmiah | Laporkan kedua versi hasil (dengan dan tanpa outlier), bukan hanya versi yang signifikan |
-| Transparansi | Penghapusan outlier harus dijelaskan alasannya, misalnya karena error input atau data corrupt |
-| Peer review | Reviewer kemungkinan akan menilai tindakan ini sebagai p-hacking jika outlier dihapus hanya demi signifikansi |
+| **Kejujuran ilmiah** | Peneliti tidak boleh menghapus outlier hanya untuk memperoleh hasil yang lebih baik. Outlier hanya boleh dihapus jika ada alasan metodologis yang sah dan terdokumentasi. |
+| **Transparansi** | Peneliti harus melaporkan hasil analisis baik dengan maupun tanpa outlier, serta menjelaskan alasan jika dilakukan pembersihan data. |
+| **Peer review** | Reviewer kemungkinan akan mempertanyakan validitas hasil jika penghapusan outlier tidak dijelaskan secara terbuka dan sistematis. |
 
-**Keputusan akhir dan justifikasi:**  
-> Peneliti sebaiknya melaporkan kedua hasil (dengan dan tanpa outlier), serta menjelaskan kriteria penghapusan outlier secara metodologis. Jika outlier memang valid sebagai bagian dari fenomena, maka hasil yang tidak signifikan tetap harus diterima sebagai temuan ilmiah yang sah.
+**Keputusan akhir dan justifikasi:**
+> Outlier tidak boleh dihapus semata-mata untuk membuat hasil menjadi signifikan. Keputusan yang paling etis adalah melaporkan kedua hasil, menjelaskan karakteristik outlier, serta memberikan justifikasi metodologis yang jelas apabila outlier memang perlu dikeluarkan. Hal ini penting untuk menjaga integritas ilmiah dan transparansi penelitian.
 
 ---
 
-## Latihan 3 — Posisi Paradigma
+# Latihan 3 — Posisi Paradigma
 
-**Topik riset:** Apakah penggunaan XGBoost meningkatkan performa prediksi dibanding Random Forest dan Logistic Regression pada data tabular?
+**Topik riset:**  
+> **Deteksi website phishing menggunakan machine learning**
 
 | Kriteria | Positivis | Interpretivis | Design Science |
 |----------|-----------|---------------|----------------|
-| Kesesuaian dengan topik (1–5) | 5 | 1 | 4 |
-| Jenis data yang dikumpulkan | Dataset numerik, akurasi, F1-score, training time | Persepsi atau pengalaman pengguna | Artefak algoritma dan hasil pengujian |
-| Limitasi paradigma | Terlalu fokus pada angka dan kurang konteks penggunaan | Sulit mengukur performa komputasi secara objektif | Bisa terlalu fokus pada artefak daripada pengetahuan |
+| **Kesesuaian dengan topik (1–5)** | **5** | **1** | **4** |
+| **Jenis data yang dikumpulkan** | Dataset kuantitatif berupa fitur website dan label phishing/legitimate | Persepsi atau pengalaman pengguna terhadap phishing | Artefak sistem, prototipe deteksi, atau model klasifikasi |
+| **Limitasi paradigma** | Cenderung fokus pada metrik performa dan kurang mengeksplorasi perilaku manusia | Kurang cocok untuk evaluasi performa model klasifikasi | Fokus pada pembangunan solusi, tetapi tidak selalu menekankan pembuktian generalisasi ilmiah |
 
-**Paradigma yang dipilih:** Positivis didukung Design Science  
-**Alasan:** Karena penelitian ini berfokus pada pengujian klaim performa secara objektif melalui eksperimen kuantitatif. Selain itu, artefak (algoritma XGBoost) digunakan sebagai instrumen untuk menguji hipotesis.
+**Paradigma yang dipilih:**  
+> **Positivis**
+
+**Alasan:**  
+> Penelitian ini berfokus pada pengujian objektif terhadap performa metode machine learning dalam mendeteksi phishing website menggunakan data kuantitatif dan metrik evaluasi yang dapat diukur secara empiris.
 
 ---
 
-## Refleksi
+# Refleksi
 
 > Sebelum membaca materi ini, apakah pernah mempertanyakan klaim "95% akurat"? Setelah memahami rantai distorsi, pertanyaan apa yang sekarang akan diajukan saat membaca paper?
 
-**Jawaban:**  
-> Sebelum memahami konsep ini, klaim seperti "95% akurat" mungkin terlihat meyakinkan.  
-> Namun sekarang saya akan bertanya: 95% akurat pada data apa, dibanding metode apa, diuji bagaimana, dan apakah hasil itu valid secara internal, eksternal, dan construct?
+**Jawaban:**
+> Sebelum memahami konsep distorsi dalam penelitian, klaim seperti “95% akurat” cenderung diterima secara langsung sebagai indikator bahwa suatu metode sudah sangat baik. Namun setelah memahami rantai distorsi penelitian, saya menyadari bahwa angka akurasi saja tidak cukup untuk menilai kualitas suatu penelitian.  
+>
+> Saat membaca paper, saya kini akan menanyakan: data apa yang digunakan, apakah dataset-nya representatif, apakah kelas datanya seimbang, bagaimana preprocessing dilakukan, metrik apa saja yang dilaporkan, apakah ada baseline pembanding, dan apakah hasil tersebut dapat direplikasi atau digeneralisasi ke konteks lain.
 
 ---
-
-## Referensi
-
-Chen, T., & Guestrin, C. (2016). *XGBoost: A Scalable Tree Boosting System*.  
-arXiv preprint arXiv:1603.02754.  
-Tersedia di: [https://arxiv.org/abs/1603.02754](https://arxiv.org/abs/1603.02754)
