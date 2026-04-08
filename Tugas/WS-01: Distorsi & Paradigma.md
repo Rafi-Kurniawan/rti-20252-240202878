@@ -1,6 +1,7 @@
 ## Template A.1 — Research Mindset Self-Assessment
 
 Nama Peneliti    : Rafi Kurniawan
+
 Tanggal          : 4/8/2026
 
 1. Ketika membaca klaim "metode X 95% akurat":
