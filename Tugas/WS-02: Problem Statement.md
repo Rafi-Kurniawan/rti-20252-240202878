@@ -1,4 +1,4 @@
-# Template A.2 — Problem Statement Builder
+# WS-02: Problem Statement Builder
 
 ## PROBLEM STATEMENT BUILDER
 
