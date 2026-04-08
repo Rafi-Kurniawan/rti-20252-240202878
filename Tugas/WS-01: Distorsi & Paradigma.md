@@ -1,10 +1,10 @@
 # WS-01: Distorsi & Paradigma
 
-##Nama  : Rafi Kurniawan
+Nama  : Rafi Kurniawan
 
-##NIM   : 240202878
+NIM   : 240202878
 
-##Kelas : 4IKRB
+Kelas : 4IKRB
 
 ## Research Mindset Self-Assessment & Problem Statement Builder  
 ### Berdasarkan Paper:
