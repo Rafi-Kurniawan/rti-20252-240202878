@@ -2,7 +2,10 @@
 ## Research Mindset Self-Assessment & Problem Statement Builder  
 ### Berdasarkan Paper:
 ### **A high-accuracy phishing website detection method based on machine learning**  
-**Bahaghighat, Ghasemi, & Ozen (2023)**
+**Bahaghighat, M., Ghasemi, M., & Ozen, F. (2023).
+A high-accuracy phishing website detection method based on machine learning.
+Journal of Information Security and Applications, 77, 103553.
+https://doi.org/10.1016/j.jisa.2023.103553**
 
 ---
 
