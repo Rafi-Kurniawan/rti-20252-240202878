@@ -1,4 +1,9 @@
 # WS-01: Distorsi & Paradigma
+
+Nama  : Rafi Kurniawan
+NIM   : 240202878
+Kelas : 4IKRB
+
 ## Research Mindset Self-Assessment & Problem Statement Builder  
 ### Berdasarkan Paper:
 ### **A high-accuracy phishing website detection method based on machine learning**  
@@ -12,6 +17,7 @@ https://doi.org/10.1016/j.jisa.2023.103553**
 ## Template A.1 — Research Mindset Self-Assessment
 
 **Nama Peneliti** : Rafi Kurniawan
+
 **Tanggal** : 4/8/2026
 
 ### 1. Ketika membaca klaim "metode X 95% akurat":
