@@ -131,3 +131,7 @@ https://doi.org/10.1016/j.jisa.2023.103553**
 > Saat membaca paper, saya kini akan menanyakan: data apa yang digunakan, apakah dataset-nya representatif, apakah kelas datanya seimbang, bagaimana preprocessing dilakukan, metrik apa saja yang dilaporkan, apakah ada baseline pembanding, dan apakah hasil tersebut dapat direplikasi atau digeneralisasi ke konteks lain.
 
 ---
+
+Referensi
+Bahaghighat, M., Ghasemi, M., & Ozen, F. (2023). A high-accuracy phishing website detection method based on machine learning. Journal of Information Security and Applications, 77, 103553. https://doi.org/10.1016/j.jisa.2023.103553
+---
