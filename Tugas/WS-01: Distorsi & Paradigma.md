@@ -132,6 +132,8 @@ https://doi.org/10.1016/j.jisa.2023.103553**
 
 ---
 
-Referensi
-Bahaghighat, M., Ghasemi, M., & Ozen, F. (2023). A high-accuracy phishing website detection method based on machine learning. Journal of Information Security and Applications, 77, 103553. https://doi.org/10.1016/j.jisa.2023.103553
+# Referensi
+
+Bahaghighat, M., Ghasemi, M., & Ozen, F. (2023). *A high-accuracy phishing website detection method based on machine learning*. *Journal of Information Security and Applications, 77*, Article 103553. https://doi.org/10.1016/j.jisa.2023.103553
+
 ---
