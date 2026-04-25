@@ -2,7 +2,7 @@
  
 ## A.2 — Problem Statement Builder
  
-```
+---
 PROBLEM STATEMENT BUILDER
  
 Domain & Konteks
@@ -65,7 +65,7 @@ Problem Statement (1 paragraf):
   ini menyebabkan keputusan pemilihan platform didasarkan pada asumsi atau tren,
   bukan bukti terukur, yang berpotensi merugikan pengembang dari sisi biaya
   maupun pengguna dari sisi pengalaman.
-```
+---
  
 ## Latihan 1 — Dari Topik ke Masalah Riset
  
@@ -81,6 +81,8 @@ Problem Statement (1 paragraf):
  
 **Apakah terjebak solution-first thinking?** Tidak  
 > Titik awal adalah gejala (bounce rate tinggi), bukan solusi (mari buat PWA). Platform dibandingkan sebagai objek penelitian, bukan sebagai solusi yang sudah dipilih.
+
+---
  
 ## Latihan 2 — System Context Decomposition
  
@@ -94,7 +96,9 @@ Problem Statement (1 paragraf):
 | Stakeholders | Pengembang aplikasi (UMKM/startup); pemilik bisnis e-commerce; pengguna akhir smartphone |
  
 **Komponen paling relevan:** Process dan Constraints — karena perbedaan performa antara PWA dan native muncul terutama pada tahap rendering dan fetch data, yang sangat dipengaruhi oleh batasan bandwidth jaringan.
- 
+
+---
+
 ## Latihan 3 — Problem Quality Check
  
 | Kriteria | Skor (1-5) | Justifikasi |
@@ -109,7 +113,9 @@ Problem Statement (1 paragraf):
  
 **Problem statement versi final:**
 > Pengembang aplikasi e-commerce mobile di Indonesia belum memiliki data empiris yang cukup untuk memilih antara Progressive Web App (PWA) dan native Android secara terukur, khususnya dalam konteks kondisi jaringan rendah (3G/2G) yang masih umum di banyak wilayah. Studi ini bertujuan mengisi gap tersebut dengan membandingkan secara sistematis performa keduanya — menggunakan metrik First Contentful Paint (FCP), Time to Interactive (TTI), dan Lighthouse Performance Score — pada prototipe aplikasi e-commerce yang diuji di simulasi jaringan 4G, 3G, dan 2G.
- 
+
+---
+
 ## Refleksi
  
 > Perbedaan fundamental antara bug coding dan masalah riset adalah pada sifat "ketidaktahuannya". Bug coding punya jawaban yang benar dan bisa diverifikasi segera (sistem berjalan atau tidak). Masalah riset adalah ketidaktahuan yang lebih dalam: kita tidak tahu mana yang lebih baik, dan jawabannya bergantung pada konteks. Di riset ini, bukan "apakah PWA bisa dibuat" (itu sudah diketahui), melainkan "apakah PWA lebih performan dari native dalam kondisi spesifik ini" — pertanyaan yang butuh eksperimen terukur untuk dijawab.
