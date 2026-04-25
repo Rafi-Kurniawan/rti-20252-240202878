@@ -1,8 +1,13 @@
 # Worksheet WS-01
+
 **Mata Kuliah:** Reset Teknologi Informasi 
+
 **Topik:** Perbandingan Performa Progressive Web App (PWA) vs Native Android dalam Konteks Aplikasi E-Commerce pada Jaringan Rendah  
+
 **Nama:** Rafi Kurniawan 
+
 **NIM:** 240202878
+
 **Tanggal:** 6 April 2026
  
 --- 
