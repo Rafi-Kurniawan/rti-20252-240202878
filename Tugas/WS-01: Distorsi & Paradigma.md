@@ -1,25 +1,19 @@
-# Laporan Worksheet WS-01 s/d WS-04
-**Mata Kuliah:** Research Mindset in IT  
-**Topik Skripsi:** Perbandingan Performa Progressive Web App (PWA) vs Native Android dalam Konteks Aplikasi E-Commerce pada Jaringan Rendah  
-**Nama:** ____________________  
-**NIM:** ____________________  
-**Tanggal:** ____________________
+# Worksheet WS-01
+**Mata Kuliah:** Reset Teknologi Informasi 
+**Topik:** Perbandingan Performa Progressive Web App (PWA) vs Native Android dalam Konteks Aplikasi E-Commerce pada Jaringan Rendah  
+**Nama:** Rafi Kurniawan 
+**NIM:** 240202878
+**Tanggal:** 6 April 2026
  
----
- 
-## Catatan Konsistensi Topik
- 
-Seluruh worksheet ini dibangun di atas **satu topik riset yang sama** sehingga dapat dilanjutkan langsung ke WS-05 dan seterusnya tanpa perubahan arah. Topik, research gap, RQ, dan hipotesis yang dirumuskan di sini adalah fondasi skripsi.
- 
----
+--- 
  
 # WS-01 — Distorsi & Paradigma
  
-## Template A.1 — Research Mindset Self-Assessment
+## A.1 — Research Mindset Self-Assessment
  
 ```
-Nama Peneliti    : ____________________
-Tanggal          : ____________________
+Nama Peneliti    : Rafi Kurniawan
+Tanggal          : 6 April 2026
  
 1. Ketika membaca klaim "PWA 40% lebih cepat dari Native App":
    - Pertanyaan pertama saya:
