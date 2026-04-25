@@ -1,6 +1,6 @@
 # WS-03 — Literature Mapping & Gap
  
-## Template A.3 — Literature Mapping & Gap Identification
+## A.3 — Literature Mapping & Gap Identification
  
 ```
 LITERATURE MAPPING
