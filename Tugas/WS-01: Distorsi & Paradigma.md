@@ -1,139 +1,107 @@
-# WS-01: Distorsi & Paradigma
-
-Nama  : Rafi Kurniawan
-
-NIM   : 240202878
-
-Kelas : 4IKRB
-
-## Research Mindset Self-Assessment & Problem Statement Builder  
-### Berdasarkan Paper:
-### **A high-accuracy phishing website detection method based on machine learning**  
-**Bahaghighat, M., Ghasemi, M., & Ozen, F. (2023).
-A high-accuracy phishing website detection method based on machine learning.
-Journal of Information Security and Applications, 77, 103553.
-https://doi.org/10.1016/j.jisa.2023.103553**
-
+# Laporan Worksheet WS-01 s/d WS-04
+**Mata Kuliah:** Research Mindset in IT  
+**Topik Skripsi:** Perbandingan Performa Progressive Web App (PWA) vs Native Android dalam Konteks Aplikasi E-Commerce pada Jaringan Rendah  
+**Nama:** ____________________  
+**NIM:** ____________________  
+**Tanggal:** ____________________
+ 
 ---
-
+ 
+## Catatan Konsistensi Topik
+ 
+Seluruh worksheet ini dibangun di atas **satu topik riset yang sama** sehingga dapat dilanjutkan langsung ke WS-05 dan seterusnya tanpa perubahan arah. Topik, research gap, RQ, dan hipotesis yang dirumuskan di sini adalah fondasi skripsi.
+ 
+---
+ 
+# WS-01 — Distorsi & Paradigma
+ 
 ## Template A.1 — Research Mindset Self-Assessment
-
-**Nama Peneliti** : Rafi Kurniawan
-
-**Tanggal** : 4/8/2026
-
-### 1. Ketika membaca klaim "metode X 95% akurat":
-- **Pertanyaan pertama saya:**  
-  Akurasi tersebut diperoleh dari dataset seperti apa, dengan distribusi kelas, metode evaluasi, dan baseline pembanding yang bagaimana?
-
-- **Data yang dibutuhkan untuk verifikasi:**  
-  Dataset yang digunakan, ukuran dan distribusi kelas, metode preprocessing, teknik validasi, confusion matrix, metrik evaluasi lengkap, serta perbandingan dengan model baseline.
-
----
-
-### 2. Posisi paradigma:
-- **Pendekatan:**  
-  [x] Positivis  
-  [ ] Interpretivis  
-  [ ] Design Science  
-  [ ] Mixed  
-
-- **Alasan:**  
-  Penelitian ini berfokus pada pengujian performa model machine learning secara objektif melalui data kuantitatif dan metrik evaluasi seperti accuracy, precision, recall, specificity, dan runtime. Tujuan utamanya adalah menguji efektivitas metode dalam mendeteksi phishing website secara empiris.
-
----
-
-### 3. Identifikasi distorsi:
-- **Asumsi tersembunyi:**  
-  Dataset yang digunakan diasumsikan cukup representatif untuk menggambarkan karakteristik phishing website di dunia nyata.
-
-- **Sumber bias potensial:**  
-  Ketidakseimbangan kelas, kualitas fitur, pemilihan dataset, preprocessing yang terlalu spesifik terhadap data tertentu, serta kemungkinan overfitting pada data latih.
-
-- **Langkah mitigasi:**  
-  Menggunakan balancing dataset, validasi yang jelas, membandingkan beberapa model baseline, melaporkan seluruh tahapan preprocessing, dan mengevaluasi model pada data yang terpisah dari data pelatihan.
-
----
-
-### 4. Komitmen etika:
-- **Data yang tidak akan dimanipulasi:**  
-  Hasil metrik evaluasi, distribusi dataset, hasil confusion matrix, serta runtime eksperimen.
-
-- **Batasan yang diakui sejak awal:**  
-  Hasil penelitian bergantung pada kualitas dan cakupan dataset yang digunakan, sehingga generalisasi terhadap seluruh bentuk phishing website di dunia nyata tetap memiliki keterbatasan.
-
----
-
-# Latihan 1 — Identifikasi Distorsi
-
-## Paper yang dipilih:
-> **Judul:** *A high-accuracy phishing website detection method based on machine learning*  
-> **Penulis (Tahun):** Bahaghighat, Ghasemi, & Ozen (2023)
-
+ 
+```
+Nama Peneliti    : ____________________
+Tanggal          : ____________________
+ 
+1. Ketika membaca klaim "PWA 40% lebih cepat dari Native App":
+   - Pertanyaan pertama saya:
+     Diukur menggunakan metrik apa? First Contentful Paint, Time to Interactive,
+     atau hanya persepsi subjektif pengguna? Di kondisi jaringan seperti apa?
+   - Data yang dibutuhkan untuk verifikasi:
+     Benchmark Lighthouse, hasil Webpagetest, kondisi jaringan (4G/3G/2G),
+     spesifikasi perangkat yang digunakan, dan ukuran dataset/payload aplikasi.
+ 
+2. Posisi paradigma:
+   - Pendekatan: [x] Positivis  [ ] Interpretivis  [ ] Design Science  [ ] Mixed
+   - Alasan: Pertanyaan riset bersifat kuantitatif dan dapat diukur secara
+     objektif menggunakan metrik standar performa (load time, FCP, TTI).
+     Eksperimen dapat dikontrol dan direplikasi oleh peneliti lain.
+ 
+3. Identifikasi distorsi:
+   - Asumsi tersembunyi:
+     (a) PWA dan Native App dianggap setara dalam fitur yang diuji.
+     (b) Pengguna memiliki perangkat Android dengan spesifikasi menengah.
+   - Sumber bias potensial:
+     (a) Pemilihan kondisi jaringan yang terlalu ideal (hanya Wi-Fi).
+     (b) Dataset produk e-commerce yang tidak representatif (terlalu sedikit item).
+   - Langkah mitigasi:
+     Simulasikan beberapa kondisi jaringan (4G, 3G, 2G) menggunakan Chrome
+     DevTools throttling. Gunakan dataset produk minimal 100 item.
+ 
+4. Komitmen etika:
+   - Data yang tidak akan dimanipulasi:
+     Hasil benchmark performa — tidak akan memilih kondisi pengujian yang hanya
+     menguntungkan salah satu platform.
+   - Batasan yang diakui sejak awal:
+     Pengujian hanya pada perangkat Android mid-range, tidak mencakup iOS.
+     Aplikasi yang dibangun adalah prototipe, bukan produk produksi penuh.
+```
+ 
+## Latihan 1 — Identifikasi Distorsi
+ 
+**Paper yang dipilih:**
+> Judul: "Performance Analysis of Progressive Web Apps vs Native Mobile Apps"  
+> Penulis (Tahun): Biørn-Hansen et al. (2021)
+ 
 | Tahap | Apa yang Dilakukan | Potensi Distorsi |
 |-------|-------------------|-----------------|
-| **Reality → Data** | Mengumpulkan dataset website phishing dan legitimate berdasarkan fitur-fitur tertentu | Dataset mungkin tidak sepenuhnya merepresentasikan variasi phishing terbaru di dunia nyata |
-| **Data → Processing** | Melakukan preprocessing, balancing dataset, penghapusan fitur konstan, dan reduksi fitur | Pemrosesan data dapat mengubah distribusi asli data dan berpotensi membuat model terlalu “cocok” dengan dataset |
-| **Processing → Analysis** | Melatih dan membandingkan beberapa model machine learning | Pemilihan hyperparameter atau konfigurasi model dapat memengaruhi hasil secara signifikan |
-| **Analysis → Inference** | Menarik kesimpulan bahwa model tertentu memiliki performa terbaik | Performa tinggi pada satu dataset belum tentu berlaku pada konteks atau dataset lain |
-| **Inference → Knowledge** | Menyimpulkan bahwa pendekatan machine learning efektif untuk deteksi phishing | Risiko overgeneralisasi jika hasil eksperimen dianggap berlaku universal tanpa validasi tambahan |
-
-**Distorsi paling besar di tahap:**  
-> **Reality → Data**
-
+| Reality → Data | Ukur load time PWA dan native app menggunakan Lighthouse di jaringan Wi-Fi | Hanya menggunakan Wi-Fi — tidak representatif pengguna mobile nyata yang sering di jaringan 3G/2G |
+| Data → Processing | Rata-rata 5 kali pengukuran Lighthouse score | Pengukuran terlalu sedikit; outlier dari cache browser dapat memengaruhi rata-rata |
+| Processing → Analysis | Bandingkan skor Lighthouse (0–100) antar platform | Skor Lighthouse adalah proxy — tidak langsung mencerminkan pengalaman pengguna nyata |
+| Analysis → Inference | Simpulkan PWA "lebih ringan" dari native | Confounding: aplikasi native yang diuji mungkin lebih feature-rich, sehingga perbandingan tidak apple-to-apple |
+| Inference → Knowledge | Dipublikasikan sebagai panduan pemilihan platform | Generalisasi berlebihan — kesimpulan berlaku untuk satu jenis aplikasi saja |
+ 
+**Distorsi paling besar di tahap:** Analysis → Inference (confounding variable: perbedaan fitur antar aplikasi yang dibandingkan)
+ 
 **Dua distorsi spesifik yang teridentifikasi:**
-1. Dataset mungkin tidak cukup mewakili pola phishing terbaru atau variasi serangan di dunia nyata.  
-2. Proses balancing dan feature selection berpotensi membuat hasil evaluasi terlalu optimistis jika tidak diuji pada skenario yang lebih realistis.
-
----
-
-# Latihan 2 — Analisis Kasus Etika
-
-**Skenario:** Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, hasil eksperimennya menjadi signifikan. Dengan outlier, hasilnya tidak signifikan.
-
+1. Pengujian hanya di Wi-Fi — tidak mencerminkan kondisi jaringan pengguna Indonesia yang rata-rata menggunakan data seluler dengan kecepatan bervariasi.
+2. Aplikasi native yang dijadikan pembanding memiliki lebih banyak fitur dibanding PWA yang diuji, sehingga perbandingan performa tidak adil.
+## Latihan 2 — Analisis Kasus Etika
+ 
+Skenario: Peneliti menemukan bahwa jika 3 pengukuran outlier (sesi di mana perangkat sedang throttle CPU) dihapus, hasil benchmark PWA menjadi 28% lebih cepat. Dengan outlier, keunggulan hanya 11%.
+ 
 | Perspektif | Analisis |
 |------------|---------|
-| **Kejujuran ilmiah** | Peneliti tidak boleh menghapus outlier hanya untuk memperoleh hasil yang lebih baik. Outlier hanya boleh dihapus jika ada alasan metodologis yang sah dan terdokumentasi. |
-| **Transparansi** | Peneliti harus melaporkan hasil analisis baik dengan maupun tanpa outlier, serta menjelaskan alasan jika dilakukan pembersihan data. |
-| **Peer review** | Reviewer kemungkinan akan mempertanyakan validitas hasil jika penghapusan outlier tidak dijelaskan secara terbuka dan sistematis. |
-
+| Kejujuran ilmiah | Laporkan kedua versi hasil — dengan dan tanpa outlier. Sertakan penjelasan teknis mengapa outlier terjadi (CPU throttle) dan biarkan pembaca menilai. |
+| Transparansi | Dokumentasikan kondisi pengujian secara lengkap: suhu perangkat, battery level, aplikasi lain yang berjalan. Jadikan bagian dari metodologi yang dapat direplikasi. |
+| Peer review | Reviewer berhak meminta analisis sensitivitas. Jika hasil berubah drastis saat 3 data point dihapus, ini justru menunjukkan temuan tidak robust dan perlu pengujian lebih lanjut. |
+ 
 **Keputusan akhir dan justifikasi:**
-> Outlier tidak boleh dihapus semata-mata untuk membuat hasil menjadi signifikan. Keputusan yang paling etis adalah melaporkan kedua hasil, menjelaskan karakteristik outlier, serta memberikan justifikasi metodologis yang jelas apabila outlier memang perlu dikeluarkan. Hal ini penting untuk menjaga integritas ilmiah dan transparansi penelitian.
-
----
-
-# Latihan 3 — Posisi Paradigma
-
-**Topik riset:**  
-> **Deteksi website phishing menggunakan machine learning**
-
+> Laporkan kedua versi (dengan dan tanpa outlier) dalam laporan utama. Tambahkan justifikasi teknis bahwa outlier disebabkan CPU throttling yang terdeteksi — bukan measurement error biasa. Ini lebih jujur dan memberikan informasi yang lebih kaya kepada pembaca.
+ 
+## Latihan 3 — Posisi Paradigma
+ 
+**Topik riset:** Perbandingan performa PWA vs Native Android pada aplikasi e-commerce di kondisi jaringan rendah
+ 
 | Kriteria | Positivis | Interpretivis | Design Science |
 |----------|-----------|---------------|----------------|
-| **Kesesuaian dengan topik (1–5)** | **5** | **1** | **4** |
-| **Jenis data yang dikumpulkan** | Dataset kuantitatif berupa fitur website dan label phishing/legitimate | Persepsi atau pengalaman pengguna terhadap phishing | Artefak sistem, prototipe deteksi, atau model klasifikasi |
-| **Limitasi paradigma** | Cenderung fokus pada metrik performa dan kurang mengeksplorasi perilaku manusia | Kurang cocok untuk evaluasi performa model klasifikasi | Fokus pada pembangunan solusi, tetapi tidak selalu menekankan pembuktian generalisasi ilmiah |
-
-**Paradigma yang dipilih:**  
-> **Positivis**
-
-**Alasan:**  
-> Penelitian ini berfokus pada pengujian objektif terhadap performa metode machine learning dalam mendeteksi phishing website menggunakan data kuantitatif dan metrik evaluasi yang dapat diukur secara empiris.
-
----
-
-# Refleksi
-
-> Sebelum membaca materi ini, apakah pernah mempertanyakan klaim "95% akurat"? Setelah memahami rantai distorsi, pertanyaan apa yang sekarang akan diajukan saat membaca paper?
-
-**Jawaban:**
-> Sebelum memahami konsep distorsi dalam penelitian, klaim seperti “95% akurat” cenderung diterima secara langsung sebagai indikator bahwa suatu metode sudah sangat baik. Namun setelah memahami rantai distorsi penelitian, saya menyadari bahwa angka akurasi saja tidak cukup untuk menilai kualitas suatu penelitian.  
->
-> Saat membaca paper, saya kini akan menanyakan: data apa yang digunakan, apakah dataset-nya representatif, apakah kelas datanya seimbang, bagaimana preprocessing dilakukan, metrik apa saja yang dilaporkan, apakah ada baseline pembanding, dan apakah hasil tersebut dapat direplikasi atau digeneralisasi ke konteks lain.
-
----
-
-# Referensi
-
-Bahaghighat, M., Ghasemi, M., & Ozen, F. (2023). *A high-accuracy phishing website detection method based on machine learning*. *Journal of Information Security and Applications, 77*, Article 103553. https://doi.org/10.1016/j.jisa.2023.103553
-
+| Kesesuaian dengan topik (1–5) | **5** | 1 | 3 |
+| Jenis data yang dikumpulkan | Load time (ms), FCP (ms), TTI (ms), bundle size (KB) — semua terukur objektif | Persepsi, pengalaman pengguna — tidak relevan untuk pertanyaan performa teknis ini | Bangun PWA dan native app sebagai artefak, lalu ukur — layak tapi kontribusi lebih ke engineering |
+| Limitasi paradigma | Hasil terikat pada spesifikasi perangkat dan kondisi jaringan yang digunakan dalam eksperimen | Tidak applicable — topik bukan studi pengalaman manusia | Risiko: fokus bergeser ke "membuat yang terbaik" bukan "menjawab pertanyaan riset" |
+ 
+**Paradigma yang dipilih:** Positivis  
+**Alasan:** Pertanyaan riset bersifat komparatif dan kuantitatif penuh. Semua variabel (load time, FCP, TTI, ukuran paket jaringan) dapat diukur secara objektif dengan alat standar (Lighthouse, Chrome DevTools, WebPageTest). Eksperimen dapat dirancang terkontrol dan direplikasi.
+ 
+## Refleksi
+ 
+> Sebelum membaca materi ini, saya mungkin langsung percaya klaim "PWA 40% lebih cepat" tanpa bertanya: diukur di jaringan apa? Dengan perangkat apa? Dibanding aplikasi native yang sekompleksitas apa? Setelah memahami rantai distorsi, pertanyaan yang sekarang akan diajukan saat membaca paper adalah: (1) Apa metrik spesifik yang digunakan? (2) Apakah kondisi pengujian dikontrol secara adil untuk kedua platform? (3) Apakah hasilnya bisa direplikasi dengan alat yang tersedia?
+ 
 ---
