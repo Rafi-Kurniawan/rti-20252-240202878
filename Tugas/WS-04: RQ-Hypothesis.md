@@ -117,20 +117,3 @@ Hypothesis Pair:
  
 ---
  
-# Ringkasan Konsistensi WS-01 s/d WS-04
- 
-| Komponen | Isi |
-|----------|-----|
-| **Topik skripsi** | Perbandingan Performa PWA vs Native Android untuk Aplikasi E-Commerce pada Jaringan Rendah |
-| **Paradigma** | Positivis — eksperimen terkontrol, pengukuran objektif |
-| **Problem statement** | UMKM e-commerce Indonesia tidak punya data empiris untuk memilih platform berdasarkan kondisi jaringan |
-| **Gap utama** | Method Gap + Context Gap: tidak ada studi yang mengontrol kondisi jaringan secara sistematis dalam konteks e-commerce Indonesia |
-| **Research Question** | Apakah PWA menghasilkan FCP dan TTI lebih rendah dari native Android pada prototipe e-commerce di simulasi jaringan 3G? |
-| **H₀** | Tidak ada perbedaan signifikan FCP PWA vs native Android (α = 0.05) |
-| **H₁** | Terdapat perbedaan signifikan FCP PWA vs native Android (α = 0.05) |
-| **Metrik utama** | FCP (ms), TTI (ms), Lighthouse Performance Score |
-| **Metode analisis** | Mann-Whitney U, effect size Cohen's d, box plot |
-| **Baseline literatur** | Biørn-Hansen et al. (2021), Pantelić & Šendelj (2022) |
- 
-> Seluruh elemen di atas bersifat konsisten dan saling mendukung. WS-05 (Metodologi) dapat dilanjutkan langsung dari rantai operasionalisasi di WS-04 tanpa perubahan topik atau variabel.
- 
