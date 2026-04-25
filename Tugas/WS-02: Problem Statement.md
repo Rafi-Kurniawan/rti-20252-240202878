@@ -3,6 +3,7 @@
 ## A.2 — Problem Statement Builder
  
 ---
+```
 PROBLEM STATEMENT BUILDER
  
 Domain & Konteks
@@ -53,7 +54,7 @@ Problem Quality Check
                      cepat pada semua kondisi jaringan
   [x] Impact       — Jika terjawab: pengembang UMKM punya dasar empiris memilih
                      platform yang tepat dan hemat biaya
-```
+
 Problem Statement :
   Aplikasi e-commerce di Indonesia semakin dominan diakses melalui perangkat
   mobile, namun kondisi jaringan yang bervariasi — khususnya di wilayah dengan
