@@ -53,8 +53,8 @@ Problem Quality Check
                      cepat pada semua kondisi jaringan
   [x] Impact       — Jika terjawab: pengembang UMKM punya dasar empiris memilih
                      platform yang tepat dan hemat biaya
- 
-Problem Statement (1 paragraf):
+```
+Problem Statement :
   Aplikasi e-commerce di Indonesia semakin dominan diakses melalui perangkat
   mobile, namun kondisi jaringan yang bervariasi — khususnya di wilayah dengan
   koneksi 3G — menyebabkan pengalaman pengguna yang tidak konsisten. Pengembang
@@ -65,6 +65,7 @@ Problem Statement (1 paragraf):
   ini menyebabkan keputusan pemilihan platform didasarkan pada asumsi atau tren,
   bukan bukti terukur, yang berpotensi merugikan pengembang dari sisi biaya
   maupun pengguna dari sisi pengalaman.
+```
 ---
  
 ## Latihan 1 — Dari Topik ke Masalah Riset
