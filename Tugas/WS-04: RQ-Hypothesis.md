@@ -1,6 +1,6 @@
 # WS-04 — Research Question & Hypothesis
  
-## Template A.4 — RQ-Contribution-Hypothesis
+## A.4 — RQ-Contribution-Hypothesis
  
 ```
 RQ-CONTRIBUTION-HYPOTHESIS
