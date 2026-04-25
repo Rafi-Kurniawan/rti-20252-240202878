@@ -11,7 +11,7 @@
  
 ## A.1 — Research Mindset Self-Assessment
  
-```
+---
 Nama Peneliti    : Rafi Kurniawan
 Tanggal          : 6 April 2026
  
@@ -47,7 +47,7 @@ Tanggal          : 6 April 2026
    - Batasan yang diakui sejak awal:
      Pengujian hanya pada perangkat Android mid-range, tidak mencakup iOS.
      Aplikasi yang dibangun adalah prototipe, bukan produk produksi penuh.
-```
+---
  
 ## Latihan 1 — Identifikasi Distorsi
  
