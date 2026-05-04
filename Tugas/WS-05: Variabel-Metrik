@@ -44,7 +44,6 @@ Metrik harus ditentukan **sebelum** eksperimen. Studi Dewi dkk. (2020) melaporka
  
 ## Template A.5 — Definisi Variabel, Metrik & Justifikasi
  
-```
 VARIABLE & METRIC DEFINITION
  
 Research Question: Apakah PWA menghasilkan FCP dan TTI lebih rendah dari
@@ -82,7 +81,6 @@ Alignment Check:
       TTI mengukur kapan interaksi pertama tersedia;
       kedua metrik ini lebih valid secara konstruk daripada hanya
       Lighthouse Score yang digunakan Adi dkk. (2021)
-```
  
 ---
  
