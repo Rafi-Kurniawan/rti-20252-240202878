@@ -1,1 +1,147 @@
-
+# WS-05 — Variabel & Metrik
+ 
+## Ringkasan Materi
+ 
+### Measurement Alignment Model
+ 
+Setiap pengukuran yang valid harus bisa ditelusuri melalui rantai ini tanpa lompatan logis:
+ 
+```
+Problem → Concept → Variable → Metric → Data → Result
+```
+ 
+Dalam konteks riset PWA vs native Android, Kurniawan (2020) menggunakan Lighthouse dan GTmetrix sebagai alat pengukuran — menunjukkan bahwa rantai ini sudah mulai dibangun dalam literatur Indonesia, meski belum dikombinasikan dengan kontrol kondisi jaringan yang ketat.
+ 
+### Operationalization = Keputusan Desain
+ 
+Menerjemahkan konsep abstrak menjadi variabel terukur bukan proses mekanis. "Performa PWA" yang diukur via Lighthouse Score (seperti Adi dkk., 2021 pada kasus Shopee) membawa asumsi implisit bahwa skor Lighthouse merepresentasikan pengalaman pengguna nyata — asumsi yang perlu dijustifikasi. Nurwanto (2019) menggunakan pendekatan deskriptif tanpa metrik kuantitatif, yang menunjukkan betapa pentingnya operasionalisasi yang tepat.
+ 
+### Empat Tipe Data (NOIR)
+ 
+| Tipe | Ciri | Contoh dalam Konteks Riset Ini | Operasi Valid |
+|------|------|-------------------------------|---------------|
+| **Nominal** | Kategori, tanpa urutan | Jenis platform: PWA vs Native Android | Modus, chi-square |
+| **Ordinal** | Urutan, interval tidak sama | Kategori kecepatan Lighthouse: Fast/Average/Slow | Median, Spearman |
+| **Interval** | Jarak bermakna, tanpa nol absolut | Suhu perangkat saat pengujian (°C) | Mean, Pearson, t-test |
+| **Ratio** | Jarak bermakna + nol absolut | FCP (ms), TTI (ms), transfer size (KB) | Semua operasi |
+ 
+Tipe data menentukan uji statistik yang valid. FCP dan TTI adalah data ratio — memungkinkan semua operasi statistik, termasuk Mann-Whitney U yang direncanakan. Lighthouse Score (0–100) secara teknis bisa diperlakukan sebagai interval/ratio, namun interpretasinya perlu hati-hati karena skor adalah agregasi tertimbang dari beberapa metrik (Kurniawan, 2020).
+ 
+### Kriteria Pemilihan Metrik
+ 
+- **Representative** — Mewakili konsep yang diteliti: FCP mewakili "kapan pengguna pertama kali melihat konten" (digunakan Kurniawan, 2020)
+- **Sensitive** — Cukup peka menangkap perbedaan bermakna: FCP dalam milidetik lebih sensitif dari Lighthouse Score yang sudah diagregasi
+- **Feasible** — Bisa dikumpulkan: Lighthouse CLI tersedia gratis, metodologi sudah terbukti digunakan di Indonesia (Adi dkk., 2021; Dewi dkk., 2020)
+### Pre-registration
+ 
+Metrik harus ditentukan **sebelum** eksperimen. Studi Dewi dkk. (2020) melaporkan "Performance Testing" tanpa menspesifikasi metrik sebelum pengujian — ini adalah risiko p-hacking yang perlu dihindari. Metrik tambahan yang ditemukan kemudian dilaporkan sebagai *exploratory*, bukan *confirmatory*.
+ 
+### Primary vs Secondary Metric
+ 
+- **Primary Metric** — FCP (ms) dan TTI (ms): langsung terikat ke hipotesis, menentukan keputusan tolak/tidak tolak H₀
+- **Secondary Metric** — Lighthouse Performance Score dan transfer size (KB): pendukung, memberikan konteks tambahan; Kurniawan dkk. (2024) menambahkan konsumsi baterai sebagai secondary metric yang relevan
+---
+ 
+## Template A.5 — Definisi Variabel, Metrik & Justifikasi
+ 
+```
+VARIABLE & METRIC DEFINITION
+ 
+Research Question: Apakah PWA menghasilkan FCP dan TTI lebih rendah dari
+native Android pada prototipe e-commerce di jaringan 3G?
+ 
+| Variabel         | Tipe | Konsep               | Metrik           | Skala | Satuan | Cara Mengukur           | Justifikasi                                      |
+|------------------|------|----------------------|------------------|-------|--------|-------------------------|--------------------------------------------------|
+| Jenis Platform   | IV   | Pendekatan rendering | Kategori: PWA    | Nominal | —    | Label eksperimental     | Variabel bebas utama; Dewi dkk. (2020) menggunakan |
+|                  |      | dan distribusi app   | vs Native Android|       |        |                         | dikotomi serupa dalam perbandingan PWA vs native  |
+| First Contentful | DV   | Kecepatan tampil     | FCP              | Ratio | ms     | Lighthouse CLI          | Metrik utama yang digunakan Kurniawan (2020);     |
+| Paint (FCP)      |      | konten pertama       |                  |       |        | (10x per kondisi,       | mengukur persepsi awal pengguna bahwa halaman     |
+|                  |      | ke pengguna          |                  |       |        | cache dikosongkan)      | mulai dimuat                                     |
+| Time to          | DV   | Kecepatan interaksi  | TTI              | Ratio | ms     | Lighthouse CLI          | Melengkapi FCP dengan mengukur kapan pengguna     |
+| Interactive (TTI)|      | pertama tersedia     |                  |       |        |                         | benar-benar bisa berinteraksi; digunakan          |
+|                  |      |                      |                  |       |        |                         | Adi dkk. (2021) dalam analisis Shopee             |
+| Lighthouse       | DV   | Skor performa        | Lighthouse       | Ratio | 0–100  | Lighthouse CLI          | Secondary metric: agregasi tertimbang dari        |
+| Score            | (2°) | keseluruhan          | Performance Score|       |        |                         | beberapa metrik; digunakan di seluruh literatur   |
+|                  |      |                      |                  |       |        |                         | Indonesia yang dikaji (Kurniawan, 2020; Adi, 2021)|
+| Transfer Size    | DV   | Beban data yang      | Total transfer   | Ratio | KB     | Chrome DevTools         | Relevan untuk konteks jaringan rendah; indikator  |
+|                  | (2°) | diunduh pengguna     | size (KB)        |       |        | Network tab             | tidak langsung efisiensi service worker           |
+|                  |      |                      |                  |       |        |                         | (Nurwanto, 2019; Kurniawan dkk., 2024)            |
+| Kondisi Jaringan | CV   | Bandwidth dan        | Throttling preset| Nominal | —    | Chrome DevTools         | Variabel kontrol utama — inilah yang tidak        |
+|                  |      | latency jaringan     | (4G/3G/2G)       |       |        | throttling              | dikontrol di studi Kurniawan (2020) dan           |
+|                  |      |                      |                  |       |        |                         | Adi dkk. (2021); dikontrol di studi ini           |
+| Spesifikasi      | CV   | Kemampuan komputasi  | RAM (GB),        | Ratio | GB, GHz| Informasi teknis        | Dikontrol agar hasil tidak confounded oleh        |
+| Perangkat        |      | perangkat pengujian  | CPU speed (GHz)  |       |        | perangkat               | perbedaan hardware — risiko yang ada di           |
+|                  |      |                      |                  |       |        |                         | Dewi dkk. (2020)                                 |
+ 
+Alignment Check:
+  RQ → Concept → Variable → Metric → Data → Result
+  [x] Setiap langkah terdokumentasi
+  [x] Tidak ada "lompatan logis"
+  [x] Metrik mengukur apa yang dimaksud (construct validity):
+      FCP mengukur persepsi awal pengguna (bukan skor abstrak);
+      TTI mengukur kapan interaksi pertama tersedia;
+      kedua metrik ini lebih valid secara konstruk daripada hanya
+      Lighthouse Score yang digunakan Adi dkk. (2021)
+```
+ 
+---
+ 
+## Latihan 1 — Operationalization Chain
+ 
+**RQ:** Apakah PWA menghasilkan FCP dan TTI lebih rendah dari native Android pada prototipe e-commerce dengan 50 produk di jaringan 3G (simulasi Chrome DevTools)?
+ 
+| Variabel | Tipe | Konsep Abstrak | Metrik Konkret | Skala (NOIR) | Satuan |
+|----------|------|---------------|----------------|-------------|--------|
+| Jenis Platform | IV | Pendekatan pengembangan dan rendering aplikasi mobile | Kategori: PWA (Chrome mobile) vs Native Android (React Native APK) | Nominal | — |
+| First Contentful Paint | DV (Primary) | Kecepatan konten pertama muncul di layar pengguna | FCP diukur dengan Lighthouse CLI — metode yang digunakan Kurniawan (2020) | Ratio | ms |
+| Time to Interactive | DV (Primary) | Waktu hingga pengguna dapat berinteraksi pertama kali | TTI diukur dengan Lighthouse CLI | Ratio | ms |
+| Lighthouse Score | DV (Secondary) | Skor performa keseluruhan — agregasi tertimbang | Lighthouse Performance Score (0–100) — digunakan Adi dkk. (2021) pada kasus Shopee | Ratio* | 0–100 |
+| Transfer Size | DV (Secondary) | Jumlah data yang diunduh pengguna per sesi | Total transfer size dari Chrome DevTools Network tab | Ratio | KB |
+| Kondisi Jaringan | CV | Bandwidth dan latency koneksi saat pengujian | Throttling preset: 4G (10 Mbps), 3G (1.5 Mbps), 2G (50 Kbps) via Chrome DevTools | Nominal (ordered) | — |
+| Spesifikasi Perangkat | CV | Kemampuan komputasi hardware pengujian | RAM (GB), CPU speed — dikontrol dengan menggunakan satu perangkat yang sama | Ratio | GB, GHz |
+ 
+*Lighthouse Score diperlakukan sebagai ratio untuk kemudahan analisis, namun interpretasi perlu hati-hati karena sifat agregatifnya.
+ 
+**Apakah ada lompatan logis dalam rantai?** Tidak
+> Rantai lengkap: "Mana platform yang lebih performan?" → "Performa = kecepatan render konten + interaktivitas" → "FCP dan TTI" → "Lighthouse CLI pada 3G throttling" → "Data ratio dalam ms" → "Uji Mann-Whitney U" → kesimpulan statistik.
+ 
+---
+ 
+## Latihan 2 — Evaluasi Metrik
+ 
+| Kriteria | Skor (1-5) | Justifikasi |
+|----------|-----------|-------------|
+| Representative | 5 | FCP dan TTI mewakili dua dimensi performa yang paling dirasakan pengguna: kapan konten pertama terlihat (FCP) dan kapan bisa diklik (TTI). Kurniawan (2020) menggunakan Lighthouse yang mencakup kedua metrik ini; Adi dkk. (2021) juga menggunakannya dalam analisis Shopee. |
+| Sensitive | 5 | FCP dan TTI dalam milidetik sangat sensitif — mampu menangkap perbedaan puluhan milidetik antar platform. Jauh lebih sensitif dari Lighthouse Score (0–100) yang sudah diagregasi dan memiliki risiko ceiling effect di kondisi 4G. |
+| Feasible | 5 | Lighthouse CLI tersedia gratis, dapat dijalankan dari terminal, dan telah terbukti digunakan oleh peneliti Indonesia (Kurniawan, 2020; Adi dkk., 2021; Dewi dkk., 2020). Tidak membutuhkan lisensi berbayar. |
+ 
+**Apakah perlu secondary metric?** Ya
+> Lighthouse Score dan transfer size (KB) sebagai secondary metric — memberikan konteks yang lebih kaya: Lighthouse Score memudahkan perbandingan dengan studi sebelumnya (Adi dkk., 2021; Hidayat dkk., 2023); transfer size relevan untuk konteks jaringan rendah dan temuan Kurniawan dkk. (2024) tentang efisiensi cache PWA.
+ 
+**Contoh kasus ceiling effect untuk metrik ini:**
+> Pada kondisi 4G (bandwidth tinggi), Lighthouse Score kedua platform kemungkinan sama-sama mencapai 90+, sehingga tidak dapat membedakan performa. Oleh karena itu, FCP dan TTI (yang tetap sensitif di 4G) lebih valid sebagai primary metric daripada hanya mengandalkan Lighthouse Score — pelajaran dari keterbatasan studi Adi dkk. (2021) yang hanya menggunakan Lighthouse Score.
+ 
+---
+ 
+## Latihan 3 — Data Quality Check
+ 
+| Dimensi | Pertanyaan | Jawaban | Strategi Mitigasi |
+|---------|-----------|---------|------------------|
+| Completeness | Apakah semua data point terkumpul? | Risiko: beberapa sesi pengukuran mungkin gagal karena crash browser atau koneksi throttling yang tidak stabil di Chrome DevTools | Rencanakan 12 pengukuran per kondisi per platform; ambil 10 yang valid. Jika < 8 valid, ulangi sesi. Kurniawan dkk. (2024) menggunakan pendekatan serupa untuk memastikan kelengkapan data baterai. |
+| Consistency | Apakah ada kontradiksi internal? | Risiko: FCP yang sangat tinggi pada satu pengukuran bisa disebabkan cache service worker yang belum aktif (PWA) atau proses background yang memenuhi RAM (native) | Kosongkan cache browser dan tutup semua aplikasi background sebelum setiap sesi. Catat status cache service worker. Ini adalah kontrol yang tidak dilakukan Adi dkk. (2021). |
+| Validity | Apakah benar-benar mengukur yang dimaksud? | Risiko: FCP dari Lighthouse CLI mengukur kondisi di emulasi Lighthouse, bukan kondisi real pengguna di lapangan. Nurwanto (2019) mencatat bahwa pengalaman nyata pengguna bisa berbeda dari hasil lab. | Dokumentasikan bahwa ini adalah pengukuran laboratorium yang terkontrol. Batasan ini diakui sejak awal di bagian metodologi. Tambahkan disclaimer bahwa hasil simulasi throttling berbeda dari kondisi jaringan nyata di lapangan. |
+| Representativeness | Apakah sampel mewakili populasi target? | Risiko: satu perangkat Android mid-range (RAM 3–4 GB) tidak mewakili seluruh spektrum perangkat pengguna Indonesia yang bervariasi dari low-end hingga flagship. Kurniawan dkk. (2024) menemukan perbedaan perilaku cache antara perangkat mid-range dan low-end. | Dokumentasikan spesifikasi perangkat secara lengkap. Akui batasan generalisasi ke perangkat low-end (< 2 GB RAM) di bagian keterbatasan penelitian. Rekomendasikan replikasi pada perangkat low-end sebagai future work. |
+ 
+---
+ 
+## Refleksi
+ 
+> **Mengapa memilih metrik setelah melihat data dianggap p-hacking? Apa bedanya dengan eksplorasi data yang sah?**
+ 
+Memilih metrik setelah melihat data adalah p-hacking karena peneliti secara tidak sadar (atau sadar) memilih metrik yang menghasilkan p < 0.05 dari sekumpulan metrik yang tersedia — menciptakan ilusi signifikansi statistik yang tidak nyata. Dalam konteks riset ini, jika peneliti mengukur FCP, TTI, Lighthouse Score, transfer size, dan waktu load halaman checkout secara bersamaan, lalu hanya melaporkan FCP karena "paling signifikan", itu adalah p-hacking.
+ 
+Perbedaannya dengan eksplorasi data yang sah: eksplorasi adalah ketika peneliti secara transparan mendeklarasikan bahwa analisis tertentu bersifat exploratory (bukan confirmatory), dilakukan setelah melihat data, dan tidak digunakan untuk mendukung klaim kausal atau uji hipotesis utama. Studi ini mengikuti praktik terbaik dengan menetapkan FCP dan TTI sebagai primary metric (confirmatory) dan Lighthouse Score serta transfer size sebagai secondary metric (supplementary/exploratory) — **sebelum** eksperimen dilakukan.
+ 
+Contoh relevan: Dewi dkk. (2020) tidak mendeklarasikan metrik primer sebelum pengujian, sehingga tidak jelas apakah "kecepatan hampir sama dengan native" adalah klaim confirmatory atau hanya observasi eksploratif. Studi ini memperbaiki kelemahan tersebut dengan pre-registrasi metrik yang eksplisit.
+ 
+---
