@@ -89,10 +89,10 @@ Sistem eksperimen ini memiliki tiga komponen utama yang bisa diisolasi: **(A) Se
  
 | Kondisi | Komponen A: Service Worker (PWA) | Komponen B: Network Throttling | Komponen C: Image Optimization | Hasil yang Diharapkan |
 |---------|----------------------------------|-------------------------------|-------------------------------|----------------------|
-| Full | ✅ Aktif | ✅ 3G preset | ✅ Gambar 150 KB | Baseline penuh — kondisi eksperimen utama |
-| – A | ❌ Service Worker dinonaktifkan | ✅ 3G preset | ✅ Gambar 150 KB | FCP PWA meningkat signifikan — membuktikan kontribusi caching service worker terhadap performa |
-| – B | ✅ Aktif | ❌ Tanpa throttling (koneksi penuh) | ✅ Gambar 150 KB | FCP dan TTI keduanya turun drastis, perbedaan antar platform mengecil — membuktikan bahwa kondisi jaringan adalah variabel kritis |
-| – C | ✅ Aktif | ✅ 3G preset | ❌ Gambar original (~500 KB) | FCP meningkat signifikan di kedua platform — membuktikan bahwa ukuran gambar adalah bottleneck utama di jaringan lambat |
+| Full |  Aktif |  3G preset |  Gambar 150 KB | Baseline penuh — kondisi eksperimen utama |
+| – A |  Service Worker dinonaktifkan |  3G preset |  Gambar 150 KB | FCP PWA meningkat signifikan — membuktikan kontribusi caching service worker terhadap performa |
+| – B |  Aktif |  Tanpa throttling (koneksi penuh) |  Gambar 150 KB | FCP dan TTI keduanya turun drastis, perbedaan antar platform mengecil — membuktikan bahwa kondisi jaringan adalah variabel kritis |
+| – C |  Aktif |  3G preset |  Gambar original (~500 KB) | FCP meningkat signifikan di kedua platform — membuktikan bahwa ukuran gambar adalah bottleneck utama di jaringan lambat |
  
 **Komponen yang diprediksi paling berkontribusi terhadap perbedaan performa:** Komponen B (Network Throttling)
  
