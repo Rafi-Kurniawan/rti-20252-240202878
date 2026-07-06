@@ -1,0 +1,17 @@
+{
+  "name": "tailwind-bootstrap-performance-test",
+  "version": "1.0.0",
+  "description": "Pengujian performa rendering Tailwind vs Bootstrap menggunakan Lighthouse",
+  "main": "run_lighthouse.js",
+  "scripts": {
+    "start": "http-server ./pages -p 8080 -c-1",
+    "test": "node run_lighthouse.js"
+  },
+  "dependencies": {
+    "chrome-launcher": "^1.2.1",
+    "csv-writer": "^1.6.0",
+    "http-server": "^14.1.1",
+    "lighthouse": "^13.4.0",
+    "yaml": "^2.9.0"
+  }
+}

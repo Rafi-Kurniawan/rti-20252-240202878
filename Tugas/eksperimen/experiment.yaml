@@ -1,0 +1,29 @@
+name: "Tailwind vs Bootstrap Performance Experiment"
+settings:
+  port: 8080
+  iterations: 10
+  throttle:
+    rttMs: 150
+    throughputKbps: 1638.4 # 1.6 Mbps
+    cpuSlowdownMultiplier: 4
+viewports:
+  - name: "mobile"
+    width: 375
+    height: 812
+    deviceScaleFactor: 3
+    mobile: true
+  - name: "tablet"
+    width: 768
+    height: 1024
+    deviceScaleFactor: 2
+    mobile: true
+  - name: "desktop"
+    width: 1920
+    height: 1080
+    deviceScaleFactor: 1
+    mobile: false
+frameworks:
+  - name: "tailwind"
+    url: "http://localhost:8080/tailwind/index.html"
+  - name: "bootstrap"
+    url: "http://localhost:8080/bootstrap/index.html"

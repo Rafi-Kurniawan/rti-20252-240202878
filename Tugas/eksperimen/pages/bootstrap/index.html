@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipe Bootstrap</title>
+    <style>
+        /* Simulasi Bootstrap yang sudah di-purge (hanya styles esensial) */
+        :root { --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif; }
+        body { margin: 0; font-family: var(--bs-font-sans-serif); background-color: #f8f9fa; color: #212529; line-height: 1.5; }
+        .container { width: 100%; padding-right: .75rem; padding-left: .75rem; margin-right: auto; margin-left: auto; max-width: 1140px; }
+        .text-center { text-align: center !important; }
+        .mt-5 { margin-top: 3rem !important; }
+        .mb-4 { margin-bottom: 1.5rem !important; }
+        .row { display: flex; flex-wrap: wrap; margin-right: -.75rem; margin-left: -.75rem; }
+        .col-md-4 { flex: 0 0 auto; width: 33.33333333%; padding: .75rem; box-sizing: border-box; }
+        .card { position: relative; display: flex; flex-direction: column; background-color: #fff; background-clip: border-box; border: 1px solid rgba(0,0,0,.125); border-radius: .25rem; }
+        .card-body { flex: 1 1 auto; padding: 1rem 1rem; }
+        .card-title { margin-bottom: .5rem; font-size: 1.25rem; font-weight: 500; }
+        .card-text { margin-top: 0; margin-bottom: 1rem; }
+        img { max-width: 100%; height: auto; }
+        @media (max-width: 768px) { .col-md-4 { width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Pengujian Performa Rendering (Bootstrap)</h1>
+        <!-- Simulasi Hero Image (Menggunakan placeholder lokal atau SVG) -->
+        <div class="text-center mb-4">
+            <svg width="600" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Hero Image" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em" font-size="24px" text-anchor="middle">Hero Image 150KB</text></svg>
+        </div>
+        <p class="text-center mb-4">Ini adalah prototipe halaman statis untuk eksperimen perbandingan FCP dan LCP antara Tailwind CSS dan Bootstrap. Halaman ini menggunakan komponen dasar seperti heading, paragraf, gambar hero, dan grid 6 card.</p>
+        
+        <h2 class="mb-4">Daftar Produk / Artikel</h2>
+        <div class="row">
+            <!-- Card 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Item 1</h5>
+                        <p class="card-text">Deskripsi singkat item 1 untuk memvalidasi performa render text block.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Item 2</h5>
+                        <p class="card-text">Deskripsi singkat item 2 untuk memvalidasi performa render text block.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Item 3</h5>
+                        <p class="card-text">Deskripsi singkat item 3 untuk memvalidasi performa render text block.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Item 4</h5>
+                        <p class="card-text">Deskripsi singkat item 4 untuk memvalidasi performa render text block.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Item 5</h5>
+                        <p class="card-text">Deskripsi singkat item 5 untuk memvalidasi performa render text block.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Item 6</h5>
+                        <p class="card-text">Deskripsi singkat item 6 untuk memvalidasi performa render text block.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
