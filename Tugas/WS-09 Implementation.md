@@ -27,7 +27,7 @@ Software:
   OS        : Windows 11 64-bit (Contoh)
   Runtime   : Node.js v18.16.0 LTS
   Framework : Tailwind CSS v3.3, Bootstrap v5.3 + PurgeCSS v5.0, Lighthouse CLI v11.3.0
-
+```
 Dependencies:
 | Library | Version | Sumber | Hash/Checksum |
 |---------|---------|--------|---------------|
@@ -36,7 +36,7 @@ Dependencies:
 | tailwindcss | 3.3.0 | npm | (sesuai package-lock.json) |
 | bootstrap | 5.3.0 | npm | (sesuai package-lock.json) |
 | purgecss | 5.0.0 | npm | (sesuai package-lock.json) |
-
+```
 Konfigurasi:
   Config file     : `experiment.yaml` (berisi target URL, viewport setting, network throttling params).
   Random seed     : Tidak diperlukan untuk Lighthouse deterministik pada konten statis (walau lag OS tetap random).
@@ -48,7 +48,6 @@ Reproducibility Check:
   [x] Config di version control
   [x] README instruksi reproduksi lengkap
 ```
-
 ---
 
 ## Latihan 1 — Environment Specification

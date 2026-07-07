@@ -26,7 +26,6 @@ Research Question: Apakah halaman web yang dibangun dengan Tailwind CSS menghasi
 | Ukuran Viewport | CV | Dimensi layar perangkat pengguna | Lebar layar: 1920px (Desktop), 768px (Tablet), 375px (Mobile) | Ordinal | px | Dikunci dengan flag `--chrome-flags` per batch pengujian. | Perangkat sangat mempengaruhi rendering; dikontrol untuk fairness. |
 | Kondisi Jaringan | CV | Kondisi bandwidth user | Preset Lighthouse simulated mobile 3G (RTT 150ms, 1.638 Kbps) | Ordinal | — | Dikunci via config Lighthouse untuk semua sesi. | Jaringan memengaruhi parsing CSS; harus stabil untuk mengisolasi variabel framework. |
 ---
-
 ```
 Alignment Check:
   RQ → Concept → Variable → Metric → Data → Result

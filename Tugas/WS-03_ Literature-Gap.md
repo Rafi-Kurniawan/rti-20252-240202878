@@ -34,7 +34,7 @@ Literature Matrix (concept-centric):
 | JOINTECOMS (2023) | 2023 | Observasi kode & class usage | Penggunaan framework | Tailwind fleksibel, Bootstrap cepat di-prototipe | Tidak ada pengukuran empiris (FCP/LCP); fokus pada efisiensi penulisan kode |
 | Rifandi dkk. (2022) | 2022 | Implementasi & observasi | Website responsif | Tailwind memudahkan UI responsif | Bukan studi komparatif (hanya Tailwind) |
 | Siahaan & Vianto (2022) | 2022 | Lighthouse benchmark | JS Framework | Lighthouse efektif untuk performa web | Fokus JS framework, bukan CSS framework |
-
+```
 Pola yang ditemukan:
   Metode dominan     : Pengukuran non-standar (seperti skor umum GTMetrix) atau evaluasi deskriptif.
   Dataset umum       : Website portofolio atau prototipe sederhana yang tidak dikontrol secara ketat agar identik antar versi.
@@ -51,7 +51,7 @@ Gap 2: [Jenis: Data Gap]
   Deskripsi    : Semua studi membandingkan framework pada desain web yang kontennya tidak benar-benar identik, sehingga tidak ada isolasi variabel independen yang valid.
   Bukti        : Akbar (2023) membangun website yang berbeda antara versi Tailwind dan Bootstrap (terlihat dari ukuran aset dan struktur elemen yang berbeda).
   Signifikansi : Tanpa isolasi variabel (halaman statis yang sama persis), perbedaan performa bisa saja disebabkan oleh perbedaan besaran gambar/konten, bukan karena pendekatan arsitektur framework CSS-nya.
-
+```
 Baseline Selection:
 | Baseline | Relevansi | Representatif | Source |
 |----------|-----------|---------------|--------|

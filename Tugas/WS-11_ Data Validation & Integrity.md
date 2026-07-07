@@ -43,7 +43,6 @@ Keputusan:
   [ ] Perlu cleaning
   [ ] Perlu re-run (skenario: -)
 ```
-
 ---
 
 ## Latihan 1 — Completeness Check

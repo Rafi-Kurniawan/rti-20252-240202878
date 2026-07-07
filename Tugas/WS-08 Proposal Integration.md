@@ -45,6 +45,7 @@ Rubrik Self-Assessment:
 | Feasibility  | Timeline >6 bulan tanpa memperhitungkan sumber   | Timeline 3-6 bulan dengan asumsi tertentu     | Timeline 1-3 bulan realistis dengan rencana detail | 3    |
 | Rigor        | Baseline tidak jelas atau straw man              | 1-2 baseline dengan justifikasi partial       | 2+ baseline SOTA + justifikasi pemilihan lengkap   | 3    |
 
+
 ---
 
 ## Latihan 1 — Kompilasi Proposal Mini

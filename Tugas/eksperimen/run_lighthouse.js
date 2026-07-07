@@ -1,5 +1,5 @@
 const fs = require('fs');
-const lighthouse = require('lighthouse');
+const lighthouse = require('lighthouse').default || require('lighthouse');
 const chromeLauncher = require('chrome-launcher');
 const yaml = require('yaml');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
@@ -60,7 +60,11 @@ async function runLighthouse(url, viewport, run_id, framework) {
 
     console.log(`[Run ${run_id}/10] Testing ${framework} on ${viewport.name}...`);
     const runnerResult = await lighthouse(url, options, lhConfig);
-    await chrome.kill();
+    try {
+        await chrome.kill();
+    } catch (e) {
+        // Ignore EPERM errors from chrome-launcher failing to delete temp profiles on Windows
+    }
 
     const audits = runnerResult.lhr.audits;
     const fcp = audits['first-contentful-paint'].numericValue;

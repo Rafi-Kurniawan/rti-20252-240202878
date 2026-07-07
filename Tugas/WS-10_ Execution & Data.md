@@ -14,7 +14,6 @@
 
 ## Template A.10 — Execution Plan & Data Log
 
-```
 EXECUTION PLAN
 
 | Run Batch | Skenario (Viewport) | Framework | Parameter (Network) | Waktu Jeda | Output File |
@@ -22,10 +21,9 @@ EXECUTION PLAN
 | Batch 1 | Mobile (375px) | Tailwind & Bootstrap | simulated 3G | 30 detik antar run | `results_mobile.csv` |
 | Batch 2 | Tablet (768px) | Tailwind & Bootstrap | simulated 3G | 30 detik antar run | `results_tablet.csv` |
 | Batch 3 | Desktop (1920px) | Tailwind & Bootstrap | simulated 3G | 30 detik antar run | `results_desktop.csv` |
-
 Jumlah runs per skenario : 10 run (per framework per viewport)
 Total runs               : 60 run (3 viewport * 2 framework * 10 iterasi)
-
+```
 DATA LOG (Format contoh untuk satu row CSV output script):
   Run ID    : run_tailwind_mobile_01
   Timestamp : 2026-07-06T10:05:00
@@ -34,7 +32,6 @@ DATA LOG (Format contoh untuk satu row CSV output script):
   Output    : FCP: 1250ms, LCP: 1300ms, Score: 85
   Anomali   : (Jika gagal: timeout Lighthouse)
 ```
-
 ---
 
 ## Latihan 1 — Execution Plan

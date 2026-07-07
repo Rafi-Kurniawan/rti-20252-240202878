@@ -82,7 +82,7 @@ Prediksi pertanyaan berdasarkan kategori:
 
 ## Template A.16 — Defense Preparation Sheet
 
-
+```
 DEFENSE PREPARATION
 
 Slide Deck Plan:
@@ -111,6 +111,7 @@ Latihan:
   Latihan 1: [tanggal] — [catatan timing & feedback]
   Latihan 2: [tanggal] — [catatan timing & feedback]
   Latihan 3: [tanggal] — [catatan timing & feedback]
+```
 
 ---
 
@@ -153,9 +154,7 @@ Prediksi 5 pertanyaan yang mungkin diajukan penguji, lalu siapkan jawaban CER.
 Minta teman/kolega mengajukan 3 pertanyaan tentang riset Anda. Catat pertanyaan dan evaluasi jawaban Anda.
 
 | # | Pertanyaan | Jawaban Saya | Evaluasi |
-|---|-----------|-------------|---------|
-| *1* | *Contoh: "Mengapa tidak membandingkan dengan metode Y?"* | *Contoh: "Karena Y memerlukan dataset labeled yang tidak tersedia. Disebutkan sebagai limitasi di halaman X."* | *[✓] Direct [✓] Data-based [✓] Honest* |
-| 1 | | | [ ] Direct [ ] Data-based [ ] Honest |
+|---|-----------|-------------|---------|| *1* | *Contoh: "Mengapa tidak membandingkan dengan metode Y?"* | *Contoh: "Karena Y memerlukan dataset labeled yang tidak tersedia. Disebutkan sebagai limitasi di halaman X."* | *[✓] Direct [✓] Data-based [✓] Honest* || 1 | | | [ ] Direct [ ] Data-based [ ] Honest |
 | 2 | | | [ ] Direct [ ] Data-based [ ] Honest |
 | 3 | | | [ ] Direct [ ] Data-based [ ] Honest |
 
