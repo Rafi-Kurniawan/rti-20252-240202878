@@ -22,7 +22,8 @@ Database   : Google Scholar, Garuda Kemdikbud, Semantic Scholar
 Query      : "Tailwind CSS" AND "Bootstrap" AND "performance" AND ("Lighthouse" OR "FCP" OR "LCP")
 Tahun      : 2020-2024
 Hasil awal : 31 paper → Screening → 6 paper final
-
+```
+---
 Literature Matrix (concept-centric):
 
 | Study | Tahun | Method | Data | Result | Limitation |
@@ -56,7 +57,7 @@ Baseline Selection:
 |----------|-----------|---------------|--------|
 | Akbar (2023) | Studi komparatif Tailwind vs Bootstrap di konteks performa. | Studi komparatif paling mutakhir di Indonesia untuk CSS framework. | Akbar, T. A. (2023). Analisis perbandingan framework CSS Bootstrap dan Tailwind... |
 | Siahaan & Vianto (2022) | Menggunakan metodologi Lighthouse untuk benchmarking front-end. | Common practice pengukuran performa web menggunakan alat standar industri. | Siahaan, R., & Vianto, D. (2022). Perbandingan performa front-end... |
-```
+
 
 ---
 
