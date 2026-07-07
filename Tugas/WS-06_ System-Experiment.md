@@ -14,7 +14,6 @@
 
 ## Template A.6 — Mapping RQ ke Arsitektur Sistem
 
-```
 SYSTEM-EXPERIMENT MAPPING
 
 Research Question: Apakah halaman web Tailwind CSS (JIT) menghasilkan FCP dan LCP berbeda secara signifikan dibanding Bootstrap (PurgeCSS) pada berbagai viewport menggunakan Lighthouse CLI?
@@ -25,7 +24,7 @@ Variable → Component Mapping:
 | Framework CSS | IV | Folder prototipe halaman statis (`/tailwind` dan `/bootstrap`) | Swap URL target pada `http-server` (localhost:8080/tailwind vs localhost:8080/bootstrap). |
 | FCP & LCP | DV | Automation script Node.js (`run_lighthouse.js`) | Parsing JSON output Lighthouse (`audits.first-contentful-paint` dan `audits.largest-contentful-paint`). |
 | Viewport & Jaringan | CV | Parameter command line Lighthouse & config file YAML | Mengubah flag `--chrome-flags` dan parameter throttling jaringan via configuration `experiment.yaml`. |
-
+```
 4 Prinsip Desain:
   [x] Traceability — Setiap komponen bisa ditelusuri ke variabel
   [x] Variable Isolation — IV bisa diubah tanpa mengubah CV
