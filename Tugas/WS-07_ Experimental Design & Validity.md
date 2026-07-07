@@ -20,21 +20,21 @@ EXPERIMENT DESIGN
 Research Question : Apakah halaman Tailwind CSS menghasilkan FCP dan LCP yang berbeda secara signifikan dari halaman Bootstrap pada ukuran viewport mobile 375px?
 Hypothesis        : Terdapat perbedaan signifikan FCP dan LCP antara Tailwind dan Bootstrap pada viewport mobile (Tailwind diharapkan lebih cepat).
 Tipe Eksperimen   : [x] Comparison  [ ] Ablation  [ ] Parameter
-
+```
 Kondisi Eksperimen:
 | Kondisi | Deskripsi | IV Value | CV Settings |
 |---------|-----------|----------|-------------|
 | Control (A) | Prototipe Bootstrap teroptimasi | Bootstrap v5 + PurgeCSS | Viewport: 375px; Network: 3G (1.6Mbps); Browser cache disabled; 10 run |
 | Treatment (B) | Prototipe Tailwind teroptimasi | Tailwind CSS v3 JIT | Viewport: 375px; Network: 3G (1.6Mbps); Browser cache disabled; 10 run |
 *(Catatan: batch eksperimen yang sama diulang pada viewport 768px dan 1920px)*
-
+```
 Fairness Checklist:
   [x] Dataset (konten web) identik untuk semua kondisi
   [x] Preprocessing (build optimization) setara
   [x] Tuning effort setara
   [x] Environment (localhost & perangkat uji) identik
   [x] Metrik evaluasi sama
-
+```
 Threat Analysis:
 | Threat Type | Ancaman Spesifik | Mitigasi |
 |-------------|-----------------|----------|
@@ -42,7 +42,7 @@ Threat Analysis:
 | External    | Hasil hanya berlaku di layout spesifik ini | Menambahkan pengakuan di bagian Limitasi pada laporan bahwa prototipe ini tidak merepresentasikan full kompleksitas website produksi e-commerce modern. |
 | Construct   | Lighthouse CLI tidak mencerminkan 'real user feel' | Mendukung hasil kuantitatif ini (Lab Data) dengan konsep standar Web Vitals yang dirancang merepresentasikan manusia. |
 | Conclusion  | Hasil skew karena background task OS berjalan | Menjalankan tes 10x dan menggunakan uji statistik non-parametrik (Mann-Whitney) karena data bisa *right-skewed*. |
-
+```
 Statistical Plan:
   Uji statistik   : Uji Mann-Whitney U.
   Justifikasi      : Sampel (n=10) kecil dan distribusi waktu rendering sering asimetris (*right-skewed* karena latensi eksternal), tidak memenuhi syarat t-test.
