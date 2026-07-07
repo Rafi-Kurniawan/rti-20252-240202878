@@ -36,7 +36,7 @@ Cognitive Trap Checklist:
   [x] Timeline sudah ditambah buffer 30-50% dari estimasi awal
   [x] Proposal mengakui kemungkinan H0 tidak ditolak (honest uncertainty)
   [x] Tidak ada klaim "pasti berhasil" atau "meningkatkan signifikan"
-
+```
 Rubrik Self-Assessment:
 | Kriteria     | 1 (Lemah)                                        | 2 (Cukup)                                     | 3 (Baik)                                           | Skor |
 |------------- |--------------------------------------------------|-----------------------------------------------|----------------------------------------------------|------|
@@ -44,7 +44,6 @@ Rubrik Self-Assessment:
 | Specificity  | Variabel/metrik masih abstrak, tidak ada angka   | Sebagian metrik terdefinisi numerik           | Semua metrik + threshold + unit pengukuran jelas   | 3    |
 | Feasibility  | Timeline >6 bulan tanpa memperhitungkan sumber   | Timeline 3-6 bulan dengan asumsi tertentu     | Timeline 1-3 bulan realistis dengan rencana detail | 3    |
 | Rigor        | Baseline tidak jelas atau straw man              | 1-2 baseline dengan justifikasi partial       | 2+ baseline SOTA + justifikasi pemilihan lengkap   | 3    |
-```
 
 ---
 
