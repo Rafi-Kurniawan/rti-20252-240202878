@@ -66,33 +66,33 @@ Data leakage terjadi ketika informasi dari test set "bocor" ke preprocessing:
 
 PREPROCESSING LOG
 
-Dataset           : ____________________
-Jumlah data awal  : ____________________
+Dataset           : Performa Lighthouse (FCP & LCP) Tailwind CSS vs Bootstrap
+Jumlah data awal  : 60 data points (6 skenario x 10 run)
 
 Cleaning:
 | Masalah | Jumlah Kasus | Penanganan | Justifikasi |
 |---------|-------------|------------|-------------|
-| Missing |             |            |             |
-| Duplikat|             |            |             |
-| Error   |             |            |             |
+| Missing | 0           | Tidak ada tindakan | Data terkumpul 100% lengkap |
+| Duplikat| 0           | Tidak ada tindakan | Setiap run independen |
+| Error   | 1 outlier   | Tetap dipertahankan | Outlier (lag spike) valid, diatasi dengan metode analisis non-parametrik (median) |
 
 Transformation:
 | Transformasi | Variabel | Detail | Alasan |
 |-------------|----------|--------|--------|
-|             |          |        |        |
+| Tidak ada   | FCP, LCP | -      | Data waktu (ms) langsung siap dianalisis tanpa transformasi matematis |
 
 Normalization:
-  Metode    : ____________________
-  Alasan    : ____________________
-  Parameter : (dihitung dari: training set / seluruh data)
+  Metode    : Tidak perlu normalisasi
+  Alasan    : Variabel metrik berskala sama (milidetik) dan uji perbandingan tidak sensitif terhadap skala absolut.
+  Parameter : N/A
 
 Leakage Check:
-  [ ] Parameter normalisasi dari training set saja
-  [ ] Tidak ada informasi test set dalam preprocessing
-  [ ] Cross-validation dilakukan setelah split
+  [x] Parameter normalisasi dari training set saja (Tidak berlaku)
+  [x] Tidak ada informasi test set dalam preprocessing
+  [x] Cross-validation dilakukan setelah split (Tidak berlaku)
 
-Jumlah data akhir : ____________________
-Script tersedia   : [ ] Ya → path: ____ | [ ] Belum
+Jumlah data akhir : 60 data points
+Script tersedia   : [ ] Ya → path: ____ | [x] Belum
 
 ---
 
@@ -102,14 +102,13 @@ Periksa dataset Anda (atau dataset contoh) dan dokumentasikan masalah yang ditem
 
 | Masalah | Jumlah Kasus | Penanganan | Justifikasi |
 |---------|-------------|------------|-------------|
-| *Contoh: Missing di kolom "label"* | *12 dari 500 (2.4%)* | *Listwise deletion* | *< 5%, distribusi random (MCAR)* |
-| | | | |
-| | | | |
-| | | | |
+| Outlier tinggi (lag) | 1 dari 60 (1.6%) | Dipertahankan dalam dataset | Representatif kondisi nyata (anomali jaringan/OS), ditangani saat uji statistik dengan Mann-Whitney U |
+| Missing file log | 0 | - | - |
+| Salah format JSON | 0 | - | - |
 
-**Jumlah data sebelum cleaning:** ____
-**Jumlah data setelah cleaning:** ____
-**Persentase data yang hilang/berubah:** ____%
+**Jumlah data sebelum cleaning:** 60
+**Jumlah data setelah cleaning:** 60
+**Persentase data yang hilang/berubah:** 0%
 
 ---
 
@@ -119,18 +118,16 @@ Tentukan apakah data Anda perlu normalisasi, dan jika ya, metode apa yang tepat.
 
 | Variabel | Range Asli | Distribusi | Outlier? | Metode Normalisasi | Alasan |
 |----------|-----------|-----------|----------|-------------------|--------|
-| *Contoh: response_time* | *0.1 – 45.2s* | *Right-skewed* | *Ya (45.2s)* | *Robust scaling* | *Ada outlier, perlu robust* |
-| *Contoh: accuracy_score* | *0.72 – 0.95* | *Normal, narrow* | *Tidak* | *Tidak perlu* | *Sudah dalam [0,1], metode berbasis distance tidak digunakan* |
-| | | | | | |
-| | | | | | |
+| FCP (ms) | 800 - 2800 | Right-skewed | Ya | Tidak perlu | Analisis menggunakan uji non-parametrik perbandingan median, bukan model machine learning berbasis distance. |
+| LCP (ms) | 950 - 3100 | Right-skewed | Ya | Tidak perlu | Sama dengan di atas. |
 
-**Apakah normalisasi diperlukan?** [ ] Ya / [ ] Tidak
+**Apakah normalisasi diperlukan?** [ ] Ya / [x] Tidak
 **Justifikasi:**
-> ___________________________________________________
+> Data dianalisis secara deskriptif dan inferensial menggunakan komparasi median (Mann-Whitney U), sehingga skala absolut tidak perlu dinormalisasi. Tidak ada pemodelan klasifikasi/regresi yang melibatkan multiple feature dengan range berbeda.
 
 **Leakage check:**
-- [ ] Parameter dihitung dari training set saja
-- [ ] Normalisasi diterapkan setelah train-test split
+- [x] Parameter dihitung dari training set saja (N/A)
+- [x] Normalisasi diterapkan setelah train-test split (N/A)
 
 ---
 
@@ -138,19 +135,20 @@ Tentukan apakah data Anda perlu normalisasi, dan jika ya, metode apa yang tepat.
 
 Buat ringkasan preprocessing lengkap — dokumentasi yang cukup bagi orang lain untuk mereplikasi.
 
-
+```
 PREPROCESSING SUMMARY
 
-1. Dataset: ____________________
-2. Data awal: ____ records, ____ features
+1. Dataset: FCP & LCP Tailwind vs Bootstrap (Lighthouse)
+2. Data awal: 60 records, 2 features (FCP, LCP)
 3. Cleaning:
-   - Missing values: ____ kasus, metode: ____
-   - Duplikat: ____ kasus, tindakan: ____
-   - Error: ____ kasus, tindakan: ____
-4. Transformation: ____________________
-5. Normalisasi: ____ (metode), parameter dari ____
-6. Data akhir: ____ records, ____ features
-7. Leakage check: [ ] Lulus / [ ] Ada masalah
+   - Missing values: 0 kasus, metode: -
+   - Duplikat: 0 kasus, tindakan: -
+   - Error (Outlier): 1 kasus, tindakan: Dipertahankan, analisis beralih ke non-parametrik.
+4. Transformation: Tidak ada.
+5. Normalisasi: Tidak ada (metode), parameter dari N/A.
+6. Data akhir: 60 records, 2 features
+7. Leakage check: [x] Lulus / [ ] Ada masalah
+```
 
 ---
 
@@ -158,5 +156,4 @@ PREPROCESSING SUMMARY
 
 > Apakah Anda pernah melakukan normalisasi "karena biasa dilakukan" tanpa mempertimbangkan apakah benar-benar diperlukan? Apa risiko over-preprocessing?
 
-> ___________________________________________________
-> ___________________________________________________
+> Kadang kita terbiasa membersihkan semua data ekstrem (outlier) agar grafik terlihat bagus. Padahal dalam riset web performance, lag spike atau outlier adalah fenomena nyata yang dirasakan pengguna. Jika kita over-processing dengan membuang semua outlier, kesimpulan performa aplikasi web yang kita buat akan terlalu optimis (terlihat lebih cepat dari aslinya).

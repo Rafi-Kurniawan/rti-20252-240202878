@@ -63,27 +63,34 @@ Keduanya **saling melengkapi**:
 ## Template A.12 — Result Presentation Plan
 
 
+```
 RESULT PRESENTATION PLAN
 
-Research Question : ____________________
-Metrik Utama      : ____________________
+Research Question : Apakah penggunaan arsitektur utility-first (Tailwind CSS) meningkatkan performa rendering awal (FCP & LCP) dibandingkan framework komponen (Bootstrap) pada berbagai ukuran viewport?
+Metrik Utama      : First Contentful Paint (FCP) dan Largest Contentful Paint (LCP) dalam satuan milidetik (ms).
 
 Tabel Hasil:
-| Skenario | Metrik 1 (mean ± std) | Metrik 2 (mean ± std) | n |
+| Skenario | FCP (mean ± std) | LCP (mean ± std) | n |
 |----------|----------------------|----------------------|---|
-|          |                      |                      |   |
+| TW Mobile (375px) | 1205 ± 25 ms | 1315 ± 35 ms | 10 |
+| BS Mobile (375px) | 1310 ± 30 ms | 1480 ± 45 ms | 10 |
+| TW Tablet (768px) | 1010 ± 20 ms | 1090 ± 22 ms | 10 |
+| BS Tablet (768px) | 1120 ± 28 ms | 1200 ± 32 ms | 10 |
+| TW Desktop (1920px)| 815 ± 15 ms  | 890 ± 18 ms  | 10 |
+| BS Desktop (1920px)| 885 ± 22 ms  | 950 ± 25 ms  | 10 |
 
 Visualisasi yang Direncanakan:
 | # | Jenis Grafik | Pesan Utama | Metrik |
 |---|-------------|-------------|--------|
-| 1 |             |             |        |
-| 2 |             |             |        |
+| 1 | Grouped Bar Chart | Tailwind konsisten lebih cepat pada viewport kecil (Mobile/Tablet), namun perbedaan menipis di Desktop | FCP (Y-axis), Viewport (X-axis), Framework (Warna/Group) |
+| 2 | Box Plot | Menunjukkan distribusi data dan memvisualisasikan lag-spike/outlier di data mentah | FCP |
 
 Bias Check:
-  [ ] Y-axis mulai dari 0 (atau dijustifikasi)
-  [ ] Error bar/CI ditampilkan
-  [ ] Semua data disertakan (tidak cherry-picked)
-  [ ] Tidak menggunakan 3D tanpa alasan
+  [x] Y-axis mulai dari 0 (atau dijustifikasi)
+  [x] Error bar/CI ditampilkan
+  [x] Semua data disertakan (tidak cherry-picked)
+  [x] Tidak menggunakan 3D tanpa alasan
+```
 
 ---
 
@@ -91,17 +98,20 @@ Bias Check:
 
 Buat tabel hasil eksperimen Anda (boleh dengan data simulasi jika belum punya data riil).
 
-| Skenario | Metrik 1 (mean ± std) | Metrik 2 (mean ± std) | n |
+| Skenario | FCP (mean ± std) | LCP (mean ± std) | n |
 |----------|----------------------|----------------------|---|
-| *Contoh: BERT-base* | *88.4 ± 1.2%* | *45.2 ± 3.1 min* | *10* |
-| | | | |
-| | | | |
+| TW Mobile (375px) | 1205 ± 25 ms | 1315 ± 35 ms | 10 |
+| BS Mobile (375px) | 1310 ± 30 ms | 1480 ± 45 ms | 10 |
+| TW Tablet (768px) | 1010 ± 20 ms | 1090 ± 22 ms | 10 |
+| BS Tablet (768px) | 1120 ± 28 ms | 1200 ± 32 ms | 10 |
+| TW Desktop (1920px)| 815 ± 15 ms  | 890 ± 18 ms  | 10 |
+| BS Desktop (1920px)| 885 ± 22 ms  | 950 ± 25 ms  | 10 |
 
 **Checklist tabel:**
-- [ ] Self-contained (judul jelas, satuan ada, N tercantum)
-- [ ] Mean ± std (bukan single number)
-- [ ] Diurutkan berdasarkan metrik utama
-- [ ] Format konsisten di semua baris
+- [x] Self-contained (judul jelas, satuan ada, N tercantum)
+- [x] Mean ± std (bukan single number)
+- [x] Diurutkan berdasarkan metrik utama (dikelompokkan berdasarkan viewport)
+- [x] Format konsisten di semua baris
 
 ---
 
@@ -111,9 +121,9 @@ Rencanakan 2-3 grafik untuk menyajikan data dari Latihan 1. Setiap grafik = satu
 
 | # | Jenis Grafik | Pesan | Data yang Digunakan |
 |---|-------------|-------|---------------------|
-| 1 | *Contoh: Bar chart + error bar* | *Perbandingan accuracy antar 3 model* | *Mean accuracy ± std* |
-| 2 | *Box plot* | *Distribusi F1 per model* | *Semua run F1* |
-| 3 | *Scatter plot* | *Trade-off accuracy vs training time* | *Mean accuracy vs mean time* |
+| 1 | Bar chart (Grouped) + error bar | Perbandingan FCP antar Framework di tiap Viewport | Mean FCP ± std |
+| 2 | Box plot | Distribusi variabilitas render time FCP dan deteksi outlier | Data seluruh 60 run FCP |
+| 3 | Scatter plot | Korelasi positif antara FCP dan LCP pada halaman uji | 60 pasang data FCP vs LCP |
 
 ---
 
@@ -125,14 +135,14 @@ Evaluasi visualisasi berikut untuk bias (skenario dari contoh):
 
 | Pertanyaan | Jawaban |
 |-----------|---------|
-| Apakah Y-axis menyesatkan? | *Contoh: Ya — A terlihat 2× B padahal beda 0.4%* |
-| Apakah error bar ditampilkan? | |
-| Apakah semua kondisi ditampilkan? | |
-| Apa solusinya? | |
+| Apakah Y-axis menyesatkan? | Ya — Y-axis mulai dari 90% membuat A terlihat menang telak (seolah 5x lipat lebih tinggi dari B), padahal bedanya cuma 0.4%. |
+| Apakah error bar ditampilkan? | Tidak, variabilitas data disembunyikan. Bisa saja margin 0.4% itu secara statistik tidak signifikan (overlap). |
+| Apakah semua kondisi ditampilkan? | Kemungkinan terburuk ini adalah data *cherry-picked* dari satu metrik akurasi terbaik saja. |
+| Apa solusinya? | Mulai Y-axis dari 0, tambahkan *error bar* (standar deviasi), atau ganti visualisasi dengan boxplot. |
 
 **Evaluasi grafik Anda sendiri dari Latihan 2:**
-- [ ] Semua bias check lulus
-- [ ] Ada yang perlu diperbaiki: ____
+- [x] Semua bias check lulus
+- [ ] Ada yang perlu diperbaiki: -
 
 ---
 
@@ -140,5 +150,4 @@ Evaluasi visualisasi berikut untuk bias (skenario dari contoh):
 
 > Mengapa tabel dan grafik keduanya diperlukan — tidak cukup salah satu saja? Pernahkah Anda membuat grafik yang (tanpa sengaja) menyesatkan?
 
-> ___________________________________________________
-> ___________________________________________________
+> Tabel diperlukan untuk mencatat nilai absolut dan referensi kuantitatif yang presisi, sedangkan grafik sangat esensial untuk memvisualisasikan tren dan mengkomunikasikan poin argumen dengan sekilas pandang. Jika hanya tabel, pembaca susah melihat pola. Jika hanya grafik, peneliti kesulitan melakukan *re-check* angka aslinya. Saya pernah mendesain chart dengan skala dinamis yang otomatis terpotong di angka bawahnya (karena default dari software), yang ternyata memberikan ilusi efeknya jauh lebih ekstrem dari kenyataan.

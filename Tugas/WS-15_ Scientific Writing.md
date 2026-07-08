@@ -79,33 +79,32 @@ Metrik-X     ✗      ✗       ✓ ←     ✗        ✗
 
 ---
 
-## Template A.15 — Paper Structure Checklist
-
-
+```
 PAPER STRUCTURE CHECKLIST
 
-Title   : ____________________
-Target  : [ ] Jurnal  [ ] Konferensi  [ ] Laporan
+Title   : Analisis Perbandingan Performa Rendering Web: Tailwind CSS vs Bootstrap Berdasarkan Metrik FCP dan LCP Lighthouse
+Target  : [x] Jurnal  [ ] Konferensi  [ ] Laporan
 
 Section Check:
-  [ ] Abstract — masalah, metode, hasil utama, kontribusi (max 250 kata)
-  [ ] Introduction — konteks → gap → RQ → kontribusi → struktur paper
-  [ ] Related Work — concept-centric, gap positioning
-  [ ] Method — reproducible: desain, variabel, metrik, setup, prosedur
-  [ ] Results — tabel + grafik + observasi (tanpa interpretasi)
-  [ ] Discussion — interpretasi, perbandingan, implikasi, limitation
-  [ ] Conclusion — jawaban RQ, kontribusi, future work
+  [x] Abstract — masalah, metode, hasil utama, kontribusi (max 250 kata)
+  [x] Introduction — konteks → gap → RQ → kontribusi → struktur paper
+  [x] Related Work — concept-centric, gap positioning
+  [x] Method — reproducible: desain, variabel, metrik, setup, prosedur
+  [x] Results — tabel + grafik + observasi (tanpa interpretasi)
+  [x] Discussion — interpretasi, perbandingan, implikasi, limitation
+  [x] Conclusion — jawaban RQ, kontribusi, future work
 
 Consistency Matrix:
-  [ ] RQ di Introduction = RQ di Method = RQ di Conclusion
-  [ ] Variabel di Method = variabel di Results
-  [ ] Klaim di Discussion didukung data di Results
-  [ ] Limitasi di Discussion di-address di Conclusion/Future Work
+  [x] RQ di Introduction = RQ di Method = RQ di Conclusion
+  [x] Variabel di Method = variabel di Results
+  [x] Klaim di Discussion didukung data di Results
+  [x] Limitasi di Discussion di-address di Conclusion/Future Work
 
 Writing Quality:
-  [ ] Clarity — mudah dipahami tanpa re-read
-  [ ] Precision — tidak ada istilah ambigu
-  [ ] Conciseness — tidak ada kalimat redundan
+  [x] Clarity — mudah dipahami tanpa re-read
+  [x] Precision — tidak ada istilah ambigu
+  [x] Conciseness — tidak ada kalimat redundan
+```
 
 ---
 
@@ -115,13 +114,13 @@ Buat outline paper untuk riset Anda menggunakan struktur IMRAD.
 
 | Section | Konten Utama (2-3 kalimat) | Target Kata |
 |---------|---------------------------|------------|
-| Abstract | *Contoh: Sistem rekomendasi memiliki akurasi tinggi tapi satisfaction rendah. Studi ini menguji CF+context signal. Hasil: satisfaction naik 38% tanpa penurunan RMSE signifikan.* | 200-250 |
-| Introduction | *Contoh: Konteks: gap antara akurasi dan kepuasan pengguna. Gap: tidak ada studi yang mengkombinasikan CF+context. RQ: apakah CF+context meningkatkan satisfaction?* | 500-700 |
-| Related Work | | 700-1000 |
-| Method | | 800-1200 |
-| Results | | 500-800 |
-| Discussion | | 600-900 |
-| Conclusion | | 200-400 |
+| Abstract | Masalah ukuran bundle CSS pada performa mobile. Metode eksperimental menggunakan Lighthouse (FCP & LCP) pada Tailwind vs Bootstrap di 3 resolusi. Hasil: Tailwind lebih cepat signifikan di mobile, tidak signifikan di desktop. | 200-250 |
+| Introduction | Konteks: CSS framework krusial namun berpotensi membebani loading awal (render-blocking). Gap: Jarang ada studi head-to-head Tailwind (utility-first) vs Bootstrap di berbagai viewport. RQ: Apakah arsitektur utility-first meningkatkan FCP/LCP dibandingkan monolithic UI di layar kecil? | 500-700 |
+| Related Work | Mengulas riset sebelumnya tentang optimasi critical rendering path, efektivitas PurgeCSS/JIT, dan metrik Core Web Vitals (FCP, LCP). | 700-1000 |
+| Method | Desain: independent sample, 6 skenario. Variabel independen: framework CSS dan viewport. Dependen: FCP, LCP. Prosedur otomasi dengan CLI Lighthouse dalam Incognito mode. | 800-1200 |
+| Results | Menyajikan tabel komparasi median FCP & LCP, serta bar chart perbandingan waktu rendering di masing-masing dari 3 jenis viewport. | 500-800 |
+| Discussion | Interpretasi mengapa Tailwind unggul (ukuran CSS minimalis setelah build). Menjelaskan mengapa perbedaan di desktop kurang terasa (resource lebih kuat). | 600-900 |
+| Conclusion | Menyimpulkan Tailwind direkomendasikan untuk web mobile-heavy. Kontribusi riset membantu pemilihan tech stack. Future work: menguji metrik interaktivitas (TBT) dengan JS framework. | 200-400 |
 
 ---
 
@@ -131,22 +130,18 @@ Buat consistency matrix untuk memverifikasi internal consistency paper Anda.
 
 |  | Intro | Method | Result | Discussion | Conclusion |
 |--|-------|--------|--------|-----------|-----------|
-| *Contoh: RQ1* | *✓* | *✓* | *✓* | *✓* | *✓* |
-| *Contoh: Metrik-X* | *✗ ←* | *✗ ←* | *✓* | *✗ ←* | *✗ ←* |
-| RQ1 | | | | | |
-| RQ2 | | | | | |
-| Metrik utama | | | | | |
-| Variabel IV | | | | | |
-| Variabel DV | | | | | |
-| Klaim/kontribusi | | | | | |
+| RQ1 (Perbandingan FCP/LCP) | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Metrik utama (FCP, LCP) | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Variabel IV (Framework, Viewport) | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Klaim/kontribusi | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 **Isi setiap sel:** ✓ (ada & konsisten), ✗ (missing), ~ (ada tapi inkonsisten)
 
 **Inkonsistensi yang ditemukan:**
-> ___________________________________________________
+> Tidak ada inkonsistensi yang terlihat pada matriks perencanaan di atas. Semua variabel dan pertanyaan riset terlacak dari Intro hingga Conclusion.
 
 **Tindakan perbaikan:**
-> ___________________________________________________
+> Tetap memonitor saat tahap penulisan agar tidak ada metrik baru (misalnya tiba-tiba membahas Cumulative Layout Shift/CLS) di Discussion yang tidak ada di bagian Method.
 
 ---
 
@@ -155,16 +150,16 @@ Buat consistency matrix untuk memverifikasi internal consistency paper Anda.
 Ambil satu paragraf dari tulisan Anda (atau tulis paragraf baru) dan evaluasi kualitasnya.
 
 **Paragraf asli:**
-> (tempel paragraf Anda di sini)
+> Berdasarkan data hasil eksperimen yang telah didapatkan pada saat proses pengujian, framework Tailwind CSS memiliki nilai performa yang lebih bagus dan lebih kencang saat meloading halaman jika dibandingkan dengan Bootstrap, ini disebabkan karena Tailwind sangat kecil ukurannya.
 
 | Kriteria | Evaluasi | Perbaikan |
 |----------|---------|-----------|
-| Clarity | *Contoh: kalimat ke-3 ambigu — "performa" bisa berarti accuracy atau speed* | *Ubah menjadi: "accuracy meningkat..."* |
-| Precision | | |
-| Conciseness | | |
+| Clarity | Kalimat terlalu panjang dan bertele-tele ("berdasarkan data hasil eksperimen yang telah didapatkan pada saat proses pengujian"). | Hapus filler words, langsung ke inti temuan. |
+| Precision | "Performa yang lebih bagus", "lebih kencang" sangat ambigu. "Sangat kecil" tidak kuantitatif. | Ganti dengan metrik pasti: FCP lebih cepat, ukuran bundle CSS (KB). |
+| Conciseness | Kata-kata tumpang tindih makna. | Persingkat susunan kalimat. |
 
 **Paragraf setelah perbaikan:**
-> (tulis paragraf yang sudah diperbaiki)
+> Tailwind CSS merender halaman secara signifikan lebih cepat (FCP 1205ms) dibandingkan Bootstrap (1310ms) pada viewport mobile (p < 0.05). Kecepatan ini disebabkan oleh minimnya ukuran file CSS Tailwind setelah proses purges (JIT compiler), yang mengurangi dampak render-blocking.
 
 ---
 
@@ -172,5 +167,4 @@ Ambil satu paragraf dari tulisan Anda (atau tulis paragraf baru) dan evaluasi ku
 
 > Apa perbedaan antara menulis "tentang" riset dan menulis sebagai "argumen" riset? Bagaimana urutan penulisan (Method → Discussion → Introduction) mengubah kualitas tulisan?
 
-> ___________________________________________________
-> ___________________________________________________
+> Menulis "tentang" riset terasa seperti laporan praktikum kronologis (saya melakukan A lalu B). Menulis "argumen" riset berarti menyusun bukti-bukti (hasil) untuk mengarahkan pembaca pada suatu pemahaman baru. Urutan penulisan yang dimulai dari Method dan Result sangat efisien, karena mengunci fondasi fakta terlebih dahulu. Setelah fakta tersaji jelas di Discussion, kita bisa menyusun Introduction dengan lebih tajam, memastikan janji di awal benar-benar sesuai dengan temuan akhir, tanpa ada yang menyimpang.
