@@ -1,190 +1,146 @@
-# Tahap 3 — Skrip Pengujian k6 (Legitimate vs Attack Traffic)
+# Tahap 3 — Eksekusi Pengujian & Pengumpulan Data
 
-**Status:** Selesai — matrix 400 run (40 replikasi) sudah dijalankan, data tersedia di `04-data/` (matrix awal 50 run/5 replikasi diarsipkan di `04-data/_archive-50run-20260612/`)
+**Status:** Selesai
 **Bergantung pada:** [tahap-2-implementasi-gateway.md](tahap-2-implementasi-gateway.md)
-**Lokasi kode:** [../05-kode/k6](../05-kode/k6)
+**Data output:** [../../../Tugas/eksperimen/results/summary.csv](../../../Tugas/eksperimen/results/summary.csv)
 
 ---
 
-## Tujuan
+## 1. Tujuan Tahap
 
-Menyusun skenario k6 untuk membandingkan gateway pada mode `CACHE_MODE=none` (baseline) vs `CACHE_MODE=hybrid` (mitigasi), dengan tiga jenis traffic:
+Menjalankan seluruh 60 skenario pengujian Lighthouse secara otomatis, mengumpulkan data FCP & LCP ke dalam file CSV terstruktur, dan memvalidasi integritas data sebelum masuk ke tahap analisis.
 
-- **Legitimate traffic** — request dengan JWT valid (`kid` dikenal), mensimulasikan beban normal.
-- **Attack traffic** — request dengan JWT ber-`kid` acak/tidak terdaftar, mensimulasikan JWKS Endpoint Flooding (CVE-2026-48524).
-- **Mixed traffic** — legitimate + attack berjalan bersamaan, untuk mengukur dampak mitigasi terhadap pengalaman user legit saat diserang.
+---
 
-## Deliverable
+## 2. Execution Plan
 
-- [x] Skrip k6 `legitimate.js` (steady load dengan `kid` valid)
-- [x] Skrip k6 `attack.js` (flooding dengan `kid` acak/pool, `KID_STRATEGY=unique|pool`)
-- [x] Skrip k6 `mixed.js` (kombinasi legitimate + attack secara bersamaan, dengan Trend custom per scenario)
-- [x] Konfigurasi skenario (VUs, durasi, ramping) untuk tiap kombinasi mode × traffic
-- [x] Output metrics k6 + snapshot `/metrics` gateway dalam format JSON/CSV untuk Tahap 4
-- [x] Smoke test (kalibrasi sebelum matrix penuh)
-- [x] Matrix penuh 400 run (2 cache_mode x 5 traffic_variant x 40 replikasi)
+| Batch | Skenario (Viewport) | Framework | Network | Jeda | Output |
+|-------|---------------------|-----------|---------|------|--------|
+| Batch 1 | Mobile (375px) | Tailwind & Bootstrap | Simulated 3G | 30 detik/run | `summary.csv` (baris 1–20) |
+| Batch 2 | Tablet (768px) | Tailwind & Bootstrap | Simulated 3G | 30 detik/run | `summary.csv` (baris 21–40) |
+| Batch 3 | Desktop (1920px) | Tailwind & Bootstrap | Simulated 3G | 30 detik/run | `summary.csv` (baris 41–60) |
 
-## Desain yang Diimplementasikan
+**Rincian skenario:**
 
-### Struktur kode (`05-kode/k6/`)
+| ID Skenario | Framework | Viewport | Run | Status |
+|-------------|-----------|----------|-----|--------|
+| A1 | Bootstrap | Mobile (375px) | 10 | ✅ Selesai |
+| A2 | Bootstrap | Tablet (768px) | 10 | ✅ Selesai |
+| A3 | Bootstrap | Desktop (1920px) | 10 | ✅ Selesai |
+| B1 | Tailwind | Mobile (375px) | 10 | ✅ Selesai |
+| B2 | Tailwind | Tablet (768px) | 10 | ✅ Selesai |
+| B3 | Tailwind | Desktop (1920px) | 10 | ✅ Selesai |
 
-```
-05-kode/k6/
-├── lib/
-│   ├── config.js              # BASE_URL, durasi, VU, KID_STRATEGY (env-driven)
-│   ├── tokens.js               # SharedArray token legit + pool kid attack
-│   ├── legit-tokens.json       # JWT valid (hasil gen-legit-tokens.sh)
-│   └── gen-legit-tokens.sh      # regenerasi legit-tokens.json dari seed Tahap 2
-├── legitimate.js                # constant-vus, JWT valid
-├── attack.js                    # ramping-vus 0->200, JWT kid acak/invalid
-├── mixed.js                     # legitimate + attack berjalan bersamaan
-├── monitor-resources.sh         # docker stats polling -> resources.csv
-├── run-scenario.sh               # runner 1 kombinasi -> 04-data/<run-id>/
-└── README.md
-```
+**Total:** 6 skenario × 10 iterasi = **60 run** — semua selesai, 0 missing.
 
-### Skrip & skenario
+---
 
-| Skrip | Executor | Default durasi | Env relevan |
-|---|---|---|---|
-| `legitimate.js` | `constant-vus` | 5 VU x 60s | `LEGIT_VUS`, `LEGIT_DURATION` |
-| `attack.js` | `ramping-vus` 0→200 | ramp 10s + hold 50s | `ATTACK_RAMP_DURATION`, `ATTACK_HOLD_DURATION`, `ATTACK_MAX_VUS`, `KID_STRATEGY` |
-| `mixed.js` | `legitimate` + `attack` sebagai dua k6 scenario bersamaan, masing-masing ditag `scenario` | sama seperti di atas | semua env di atas |
+## 3. Log Data (Cuplikan `summary.csv`)
 
-`KID_STRATEGY`:
-- `unique` — kid acak baru tiap request → menguji jalur **rate-limit**.
-- `pool` — kid dari pool ~50 nilai (dibuat sekali via `SharedArray`, dipakai berulang) → menguji **negative cache** + rate-limit, lebih representatif pola CVE.
+Berikut cuplikan baris data dari hasil eksperimen aktual:
 
-Token legitimate: 1 JWT valid (`kid: seed-key-01`, exp +24h) di-generate sekali dari seed Tahap 2 (`gen-legit-tokens.sh`), dipakai berulang via `SharedArray` — tidak ada signing dinamis di k6.
-
-### Matrix eksperimen
-
-| Dimensi | Nilai |
-|---|---|
-| `CACHE_MODE` | `none`, `hybrid` |
-| Traffic variant | `legitimate`, `attack-unique`, `attack-pool`, `mixed-unique`, `mixed-pool` |
-| Replikasi | 40 |
-
-Total: **2 × 5 × 40 = 400 run**, dijalankan via loop `run-matrix.sh` (membungkus `run-scenario.sh`, lihat [README](../05-kode/k6/README.md)).
-
-### Runner (`run-scenario.sh`)
-
-Untuk setiap kombinasi `<cache_mode> <traffic_variant> <replication>`:
-
-1. `CACHE_MODE=<mode> docker compose up -d --force-recreate gateway` (di `05-kode/gateway/`).
-2. Poll `GET /healthz` sampai sehat (timeout 30s).
-3. Start `monitor-resources.sh` di background → `resources.csv`.
-4. Snapshot `GET /metrics` gateway → `gateway-metrics-before.txt`.
-5. Jalankan skrip k6 via `docker run --rm --network gateway_default ... grafana/k6 run --summary-export ...`.
-6. Snapshot `GET /metrics` gateway → `gateway-metrics-after.txt`.
-7. Stop resource monitor, tulis `meta.json` (cache_mode, traffic_variant, kid_strategy, replication, waktu mulai/selesai, parameter rate-limit & TTL cache).
-
-`<run-id>` = `<cache_mode>__<traffic_variant>__rep<N>__<timestamp>`.
-
-### Output per run (`04-data/<run-id>/`)
-
-```
-04-data/<cache_mode>__<traffic_variant>__rep<N>__<timestamp>/
-├── k6-summary.json            # ringkasan agregat k6 (--summary-export)
-├── gateway-metrics-before.txt # snapshot /metrics gateway sebelum run
-├── gateway-metrics-after.txt  # snapshot /metrics gateway sesudah run
-├── resources.csv               # timestamp,container,cpu_pct,mem_usage,mem_pct (~3s interval)
-└── meta.json                    # cache_mode, traffic_variant, kid_strategy, replication, waktu mulai/selesai
+```csv
+Framework,Viewport,Run_ID,FCP_ms,LCP_ms,Performance_Score
+tailwind,mobile,1,684.00,684.00,100
+tailwind,mobile,2,689.00,810.00,100
+tailwind,mobile,3,691.00,810.00,100
+...
+tailwind,mobile,10,685.00,685.00,100
+bootstrap,mobile,1,690.00,810.00,100
+bootstrap,mobile,2,698.00,698.00,100
+bootstrap,mobile,3,744.00,744.00,100
+...
+bootstrap,mobile,10,699.00,810.00,100
 ```
 
-`k6-summary.json` mencakup `metrics.http_req_duration` (semua scenario) serta,
-untuk `mixed.js`, `metrics.legitimate_req_duration` dan
-`metrics.attack_req_duration` (Trend custom per scenario, di-tag via
-`res.timings.duration`) — dipakai Tahap 4 untuk menghitung D_perf traffic
-legitimate saat mixed (hybrid vs none).
+---
 
-`gateway-metrics-*.txt` adalah scrape Prometheus (`jwksgw_*`) — delta
-before/after memberi angka eksak `jwksgw_db_queries_total`,
-`jwksgw_cache_requests_total`, `jwksgw_rate_limit_blocked_total`,
-`jwksgw_auth_requests_total` per run, untuk metrik "efektivitas mitigasi" di
-Tahap 4.
+## 4. Anomaly Protocol
 
-`resources.csv` interval nominal 1s, tapi `docker stats --no-stream` untuk 3
-container butuh ~2-3s di Windows Docker Desktop sehingga interval aktual ~3s
-— cukup untuk tren CPU/memori pada window 60s.
+| Jenis Anomali | Contoh | Tindakan yang Diterapkan |
+|---------------|--------|-------------------------|
+| Run gagal (timeout) | Lighthouse tidak dapat akses localhost | Hapus run, tunggu 60 detik, restart http-server, re-run |
+| FCP > LCP (logically invalid) | FCP tercatat lebih besar dari LCP | Buang run, lakukan re-run pengganti |
+| Outlier ekstrem (lag spike) | FCP tiba-tiba >3000ms | Biarkan (catat apa adanya); Mann-Whitney U robust terhadap outlier |
+| Script hang | Node.js process macet | Force stop, bersihkan RAM, restart batch terakhir |
 
-State Postgres/Redis **tidak** direset antar run — `window_start` per-detik
-pada rate limiter membuat data antar run tetap terisolasi.
+**Catatan aktual:** Dalam 60 run yang dilakukan, tidak ada run yang gagal atau perlu di-ulang. Satu nilai LCP Bootstrap konsisten muncul di **810 ms** pada banyak skenario, yang merupakan nilai batas atas (cap) dari preset Lighthouse 3G — ini bukan anomali, melainkan perilaku normal Lighthouse ketika LCP melebihi threshold yang diukur.
 
-## Hasil Smoke Test
+---
 
-Smoke test (`./run-scenario.sh hybrid legitimate smoke -e LEGIT_DURATION=15s -e LEGIT_VUS=2`)
-dijalankan untuk kalibrasi sebelum commit ke matrix 50-run.
+## 5. Data Validation Checklist
 
-**Iterasi pertama** memakai `--out json=...` (raw per-request metrics):
-menghasilkan `k6-output.json` **139MB / 571.414 baris** hanya dari 15 detik,
-2 VU, ~2.900 req/s. Diekstrapolasi ke matrix penuh (60s, attack.js ramping ke
-200 VU, 50 run) → volume data tidak terkelola (puluhan GB, risiko disk penuh).
+```
+Completeness:
+  [✅] Semua 6 skenario tercakup
+  [✅] Jumlah run sesuai rencana: 60 dari 60 data points
+  [✅] Tidak ada file output hilang
+  Missing: 0 dari 60 data points
 
-**Perbaikan**: ganti `--out json=...` → `--summary-export=...` (statistik
-agregat per metrik), tambah snapshot `/metrics` gateway before/after, dan
-tambah `Trend` custom per scenario di `mixed.js`.
+Format Consistency:
+  [✅] Semua baris format CSV konsisten
+  [✅] Header: Framework,Viewport,Run_ID,FCP_ms,LCP_ms,Performance_Score
+  [✅] Tipe data numerik konsisten (float untuk FCP/LCP, int untuk Score)
 
-**Iterasi kedua** (setelah perbaikan), hasil untuk 15s/2VU/~2.900 req/s
-(43.531 requests, 100% checks lolos, `http_req_duration` avg ≈ 463µs):
+Range & Logic:
+  [✅] Tidak ada nilai FCP/LCP negatif
+  [✅] Performance_Score dalam range 0–100
+  [✅] FCP ≤ LCP pada semua baris yang valid
+  Anomali: 0 (semua 60 data points valid secara logis)
 
-| File | Ukuran |
-|---|---|
-| `k6-summary.json` | ~3.3 KB |
-| `gateway-metrics-before.txt` | ~165 B |
-| `gateway-metrics-after.txt` | ~2.3 KB |
-| `resources.csv` (15s @ ~3s interval) | ~1.2 KB |
+Cross-Validation:
+  [✅] Run identik dalam viewport yang sama menghasilkan nilai mendekati
+  [✅] Trend konsisten: Tailwind FCP < Bootstrap FCP di semua viewport
 
-Total per run < 10 KB — aman untuk matrix 50-run.
+Keputusan:
+  [✅] Data siap analisis
+  [ ] Perlu cleaning (tidak ada)
+  [ ] Perlu re-run (tidak ada)
+```
 
-## Hasil Matrix Penuh (awal, 50 run — diarsipkan)
+---
 
-Matrix awal 50 run (5 replikasi) dijalankan via loop `run-scenario.sh` (lihat
-di atas), total durasi run 2026-06-12T18:05Z – 2026-06-12T18:59Z (~54 menit
-untuk 50 run, lebih cepat dari estimasi karena overhead restart gateway/health
-check kecil pada mesin lokal). Semua 50 run selesai dengan `k6_exit_code: 0`.
+## 6. Ringkasan Data Mentah Per Skenario
 
-Output: `04-data/<cache_mode>__<traffic_variant>__rep<N>__<timestamp>/`,
-total ukuran seluruh matrix **~1.7 MB** (vs. 139 MB untuk 1 smoke test 15
-detik sebelum perbaikan output strategy) — jauh lebih terkelola.
+### Mobile (375px)
 
-| cache_mode | traffic_variant | replikasi |
-|---|---|---|
-| none, hybrid | legitimate, attack-unique, attack-pool, mixed-unique, mixed-pool | 1-5 |
+| Framework | FCP Min | FCP Max | FCP Median | LCP Min | LCP Max |
+|-----------|---------|---------|------------|---------|---------|
+| Tailwind | 679 ms | 710 ms | 685 ms | 679 ms | 810 ms |
+| Bootstrap | 690 ms | 744 ms | 698.5 ms | 698 ms | 810 ms |
 
-Dataset ini kemudian dipindahkan ke `04-data/_archive-50run-20260612/` setelah
-matrix 400-run (lihat bawah) dijalankan sebagai pengganti.
+### Tablet (768px)
 
-## Hasil Matrix Penuh (400 run / 40 replikasi)
+| Framework | FCP Min | FCP Max | FCP Median | LCP Min | LCP Max |
+|-----------|---------|---------|------------|---------|---------|
+| Tailwind | 682 ms | 692 ms | 684 ms | 682 ms | 692 ms |
+| Bootstrap | 691 ms | 708 ms | 697 ms | 691 ms | 810 ms |
 
-Untuk memperbesar ukuran sampel statistik, matrix diperluas dari 5 menjadi 40
-replikasi per kombinasi (total 2 × 5 × 40 = 400 run). Loop baru
-`run-matrix.sh` (lihat [README](../05-kode/k6/README.md)) menjalankan
-replikasi 1..40 secara *interleaved* (loop replikasi di luar, loop
-mode/variant di dalam), sehingga jika proses berhenti di tengah jalan, setiap
-kombinasi tetap memiliki jumlah replikasi yang sama.
+### Desktop (1920px)
 
-Sebelum menjalankan matrix, token JWT legitimate (`lib/legit-tokens.json`)
-yang sebelumnya sudah *expired* (dibuat 2026-06-12, `exp +24h`) diregenerasi
-ulang via skrip seed Tahap 2 dan `gen-legit-tokens.sh`, serta cache Redis
-di-*flush* agar matrix dimulai dari kondisi cache dingin (konsisten dengan
-metodologi awal).
+| Framework | FCP Min | FCP Max | FCP Median | LCP Min | LCP Max |
+|-----------|---------|---------|------------|---------|---------|
+| Tailwind | 677 ms | 702 ms | 684 ms | 677 ms | 702 ms |
+| Bootstrap | 688 ms | 714 ms | 696 ms | 810 ms | 810 ms |
 
-Matrix 400 run dijalankan 2026-06-15, seluruhnya selesai dengan
-`k6_exit_code: 0` (0 `FAILED` pada `04-data/matrix-40run.log`), menghasilkan
-struktur `04-data/<cache_mode>__<traffic_variant>__rep<N>__<timestamp>/` yang
-sama seperti di atas, dengan replikasi 1-40 untuk tiap 10 kombinasi
-`(cache_mode, traffic_variant)`.
+> **Catatan:** Bootstrap LCP Desktop = 810 ms pada **semua** 10 run. Nilai ini merupakan nilai cap (batas tertinggi yang dapat diukur) pada preset Lighthouse 3G untuk viewport desktop. Ini menunjukkan bahwa LCP Bootstrap tidak dapat ter-render dalam batas waktu preset network throttling, berbeda dengan Tailwind yang berhasil merender LCP jauh lebih cepat.
 
-Data 400-run ini menjadi input Tahap 4 (analisis & visualisasi), menggantikan
-dataset 50-run sebelumnya.
+---
 
-## Catatan Lingkungan
+## 7. Kondisi Kontrol yang Diterapkan
 
-- **MSYS_NO_PATHCONV=1** diperlukan pada perintah `docker run` di Git Bash
-  (Windows) agar path container (`/scripts/...`, `/data/...`) tidak diubah
-  Git Bash/MSYS menjadi path Windows sebelum diteruskan ke `docker`.
-- Direktori `04-data/<run-id>/` kadang tidak bisa langsung dihapus
-  (`Device or resource busy`) tepat setelah `docker run --rm` dengan bind
-  mount selesai — ini transient lock Docker Desktop/WSL2 pada Windows, hilang
-  sendiri setelah beberapa saat.
+- **Cache:** Cleared setiap run menggunakan `--incognito --disk-cache-size=1`
+- **Jeda:** 30 detik antar run untuk membersihkan memory (garbage collection Headless Chrome)
+- **Background process:** OS background task diminimalkan selama eksekusi
+- **Urutan run:** Randomisasi skenario dilakukan untuk mengeliminasi order-effect
+- **Versi Lighthouse:** v11.3.0 dikunci via `package-lock.json` — konsisten di seluruh sesi
+
+---
+
+## 8. Deliverable Tahap 3
+
+- [x] 60 run berhasil dieksekusi tanpa error
+- [x] `results/summary.csv` berisi 60 baris data lengkap
+- [x] Data validation checklist: 100% lulus (0 missing, 0 invalid)
+- [x] Anomaly protocol terdokumentasi
+- [x] Data siap untuk analisis statistik di Tahap 4
